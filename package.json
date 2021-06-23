@@ -1,0 +1,19 @@
+{
+  "name": "fisheye",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000f\u0000i\u0000s\u0000h\u0000e\u0000y\u0000e\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/style.scss:public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franzmongin/fisheye.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/franzmongin/fisheye/issues"
+  },
+  "homepage": "https://github.com/franzmongin/fisheye#readme"
+}
