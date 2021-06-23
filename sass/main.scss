@@ -1,4 +1,2 @@
-@import url(./__base/__reset.scss);
-body {
-  background-color: green;
-}
+@import "__base/__reset";
+@import "__pages/__home";
