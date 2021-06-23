@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/franzmongin/fisheye#readme",
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
     "css-loader": "^5.2.6",
     "node-sass": "^6.0.0",
     "sass-loader": "^12.1.0",

@@ -4,6 +4,7 @@ module.exports = {
   mode: "production",
   entry: {
     app: "./index.js",
+    polyfill: "babel-polyfill",
   },
   output: {
     filename: "[name].bundle.js",
@@ -21,6 +22,16 @@ module.exports = {
           // Compiles Sass to CSS
           "sass-loader",
         ],
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
     ],
   },
