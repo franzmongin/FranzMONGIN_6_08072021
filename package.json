@@ -1,10 +1,11 @@
 {
   "name": "fisheye",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000f\u0000i\u0000s\u0000h\u0000e\u0000y\u0000e\u0000\r\u0000 \u0000",
+  "description": "A photographer website",
   "main": "index.js",
   "scripts": {
-    "sass": "sass --watch ./sass/style.scss:public/css/style.css"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/franzmongin/fisheye/issues"
   },
-  "homepage": "https://github.com/franzmongin/fisheye#readme"
+  "homepage": "https://github.com/franzmongin/fisheye#readme",
+  "devDependencies": {
+    "css-loader": "^5.2.6",
+    "node-sass": "^6.0.0",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.40.0",
+    "webpack-cli": "^4.7.2"
+  }
 }
