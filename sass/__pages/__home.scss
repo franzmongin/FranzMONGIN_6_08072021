@@ -1,3 +1,14 @@
 .header {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__nav-link {
+    color: $primary-color;
+    border: 1px solid #c4c4c4;
+    height: 22px;
+    padding: 3px;
+    border-radius: 11px;
+    text-decoration: none;
+    font-family: "DM Sans";
+  }
 }
