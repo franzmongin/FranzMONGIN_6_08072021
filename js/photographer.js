@@ -1,5 +1,3 @@
-class Photographer{
-    constructor(){
-        
-    }
+class Photographer {
+  constructor() {}
 }
