@@ -69,8 +69,8 @@ function addEventListenerToDifferentTagLink () {
       item.addEventListener('click', (e) => orderMembers(e, 'architecture'))
     } else if (item.classList.contains('tag-travel')) {
       item.addEventListener('click', (e) => orderMembers(e, 'travel'))
-    } else if (item.classList.contains('tag-sport')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'sport'))
+    } else if (item.classList.contains('tag-sports')) {
+      item.addEventListener('click', (e) => orderMembers(e, 'sports'))
     } else if (item.classList.contains('tag-animals')) {
       item.addEventListener('click', (e) => orderMembers(e, 'animals'))
     } else if (item.classList.contains('tag-events')) {
@@ -132,9 +132,9 @@ function orderMembers (e, tag) {
       }
 
       break
-    case 'sport':
+    case 'sports':
       for (const memberElement of membersElements) {
-        if (memberElement.querySelector('.tag-sport') === null) {
+        if (memberElement.querySelector('.tag-sports') === null) {
           memberElement.style.display = 'none'
         } else {
           memberElement.style.display = ''
