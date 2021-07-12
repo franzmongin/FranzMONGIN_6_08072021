@@ -8,8 +8,10 @@
   align-items: center;
   padding: 40px 5%;
   flex-wrap: wrap;
+  row-gap: 30px;
+  // width: calc(100vw - 306px);
+  justify-content: space-between;
   .header-link {
-    padding-right: 10px;
     img {
       width: 200px;
     }
@@ -23,6 +25,9 @@
       column-gap: 6px;
       row-gap: 6px;
     }
+  }
+  .invisible-div {
+    width: 306px;
   }
 }
 .main {
@@ -150,6 +155,7 @@
 }
 @media screen and (max-width: 680px) {
   .main {
+    margin-top: 0;
     #photographer-list {
       justify-content: center;
     }
