@@ -1,23 +1,23 @@
-import './sass/main.scss'
-import * as data from './data/photographers.json'
-import Factory from './js/factory'
+import "./sass/main.scss";
+import * as data from "./data/photographers.json";
+import Factory from "./js/factory";
 
-const factory = new Factory()
-let members = []
+const factory = new Factory();
+let members = [];
 
 // chargement des photographes
-function chargeMembers () {
-  members = []
+function chargeMembers() {
+  members = [];
   for (let i = 0; i < data.photographers.length; i++) {
-    members.push(factory.createMember(data.photographers[i]))
+    members.push(factory.createMember(data.photographers[i]));
   }
-  let htmlMembers = ''
+  let htmlMembers = "";
   for (const member of members) {
-    let memberTagHtml = ''
+    let memberTagHtml = "";
     for (const tag of member.tags) {
       memberTagHtml += `
     <li class="tag-link tag-${tag}"><a href=""><span class="sr-only">${tag}</span>#${tag}</a></li>
-    `
+    `;
     }
     const template = `
         <div class="member" id="${member.id}">
@@ -38,131 +38,131 @@ function chargeMembers () {
             </ul>
           </div>
         </div>
-`
-    htmlMembers += template
+`;
+    htmlMembers += template;
   }
-  document.getElementById('photographer-list').innerHTML = htmlMembers
+  document.getElementById("photographer-list").innerHTML = htmlMembers;
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-  chargeMembers()
-  addEventListenerToDifferentTagLink()
-  document.querySelector('.header-link').addEventListener('click', (e) => {
-    e.preventDefault()
-    const membersElements = document.querySelectorAll('.member')
+document.addEventListener("DOMContentLoaded", function (event) {
+  chargeMembers();
+  addEventListenerToDifferentTagLink();
+  document.querySelector(".header-link").addEventListener("click", (e) => {
+    e.preventDefault();
+    const membersElements = document.querySelectorAll(".member");
     for (const memberElement of membersElements) {
-      memberElement.style.display = ''
+      memberElement.style.display = "";
     }
-  })
-})
+  });
+});
 
-function addEventListenerToDifferentTagLink () {
-  const items = document.getElementsByClassName('tag-link')
+function addEventListenerToDifferentTagLink() {
+  const items = document.getElementsByClassName("tag-link");
   for (const item of items) {
-    if (item.classList.contains('tag-portrait')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'portrait'))
-    } else if (item.classList.contains('tag-fashion')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'fashion'))
-    } else if (item.classList.contains('tag-art')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'art'))
-    } else if (item.classList.contains('tag-architecture')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'architecture'))
-    } else if (item.classList.contains('tag-travel')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'travel'))
-    } else if (item.classList.contains('tag-sports')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'sports'))
-    } else if (item.classList.contains('tag-animals')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'animals'))
-    } else if (item.classList.contains('tag-events')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'events'))
+    if (item.classList.contains("tag-portrait")) {
+      item.addEventListener("click", (e) => orderMembers(e, "portrait"));
+    } else if (item.classList.contains("tag-fashion")) {
+      item.addEventListener("click", (e) => orderMembers(e, "fashion"));
+    } else if (item.classList.contains("tag-art")) {
+      item.addEventListener("click", (e) => orderMembers(e, "art"));
+    } else if (item.classList.contains("tag-architecture")) {
+      item.addEventListener("click", (e) => orderMembers(e, "architecture"));
+    } else if (item.classList.contains("tag-travel")) {
+      item.addEventListener("click", (e) => orderMembers(e, "travel"));
+    } else if (item.classList.contains("tag-sports")) {
+      item.addEventListener("click", (e) => orderMembers(e, "sports"));
+    } else if (item.classList.contains("tag-animals")) {
+      item.addEventListener("click", (e) => orderMembers(e, "animals"));
+    } else if (item.classList.contains("tag-events")) {
+      item.addEventListener("click", (e) => orderMembers(e, "events"));
     }
   }
 }
-function orderMembers (e, tag) {
-  const membersElements = document.querySelectorAll('.member')
-  e.preventDefault()
+function orderMembers(e, tag) {
+  const membersElements = document.querySelectorAll(".member");
+  e.preventDefault();
   switch (tag) {
-    case 'portrait':
+    case "portrait":
       for (const memberElement of membersElements) {
-        if (memberElement.querySelector('.tag-portrait') === null) {
-          memberElement.style.display = 'none'
+        if (memberElement.querySelector(".tag-portrait") === null) {
+          memberElement.style.display = "none";
         } else {
-          memberElement.style.display = ''
+          memberElement.style.display = "";
         }
       }
 
-      break
-    case 'fashion':
+      break;
+    case "fashion":
       for (const memberElement of membersElements) {
-        if (memberElement.querySelector('.tag-fashion') === null) {
-          memberElement.style.display = 'none'
+        if (memberElement.querySelector(".tag-fashion") === null) {
+          memberElement.style.display = "none";
         } else {
-          memberElement.style.display = ''
+          memberElement.style.display = "";
         }
       }
 
-      break
-    case 'art':
+      break;
+    case "art":
       for (const memberElement of membersElements) {
-        if (memberElement.querySelector('.tag-art') === null) {
-          memberElement.style.display = 'none'
+        if (memberElement.querySelector(".tag-art") === null) {
+          memberElement.style.display = "none";
         } else {
-          memberElement.style.display = ''
+          memberElement.style.display = "";
         }
       }
 
-      break
-    case 'architecture':
+      break;
+    case "architecture":
       for (const memberElement of membersElements) {
-        if (memberElement.querySelector('.tag-architecture') === null) {
-          memberElement.style.display = 'none'
+        if (memberElement.querySelector(".tag-architecture") === null) {
+          memberElement.style.display = "none";
         } else {
-          memberElement.style.display = ''
+          memberElement.style.display = "";
         }
       }
 
-      break
-    case 'travel':
+      break;
+    case "travel":
       for (const memberElement of membersElements) {
-        if (memberElement.querySelector('.tag-travel') === null) {
-          memberElement.style.display = 'none'
+        if (memberElement.querySelector(".tag-travel") === null) {
+          memberElement.style.display = "none";
         } else {
-          memberElement.style.display = ''
+          memberElement.style.display = "";
         }
       }
 
-      break
-    case 'sports':
+      break;
+    case "sports":
       for (const memberElement of membersElements) {
-        if (memberElement.querySelector('.tag-sports') === null) {
-          memberElement.style.display = 'none'
+        if (memberElement.querySelector(".tag-sports") === null) {
+          memberElement.style.display = "none";
         } else {
-          memberElement.style.display = ''
+          memberElement.style.display = "";
         }
       }
 
-      break
-    case 'animals':
+      break;
+    case "animals":
       for (const memberElement of membersElements) {
-        if (memberElement.querySelector('.tag-animals') === null) {
-          memberElement.style.display = 'none'
+        if (memberElement.querySelector(".tag-animals") === null) {
+          memberElement.style.display = "none";
         } else {
-          memberElement.style.display = ''
+          memberElement.style.display = "";
         }
       }
 
-      break
-    case 'events':
+      break;
+    case "events":
       for (const memberElement of membersElements) {
-        if (memberElement.querySelector('.tag-events') === null) {
-          memberElement.style.display = 'none'
+        if (memberElement.querySelector(".tag-events") === null) {
+          memberElement.style.display = "none";
         } else {
-          memberElement.style.display = ''
+          memberElement.style.display = "";
         }
       }
 
-      break
+      break;
     default:
-      break
+      break;
   }
 }
