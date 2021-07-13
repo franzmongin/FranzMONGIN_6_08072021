@@ -1,60 +1,27 @@
 import "./sass/main.scss";
 import * as data from "./data/photographers.json";
-import Factory from "./js/factory";
+import Factory from "./js/Factory";
 
 const factory = new Factory();
+let membersJson = data.photographers;
 let members = [];
 
 // chargement des photographes
 function chargeMembers() {
   members = [];
-  for (let i = 0; i < data.photographers.length; i++) {
-    members.push(factory.createMember(data.photographers[i]));
+  console.log(membersJson);
+  
+  for (let i = 0; i < membersJson.length; i++) {
+    members.push(factory.createMember(membersJson[i]));
   }
   let htmlMembers = "";
   for (const member of members) {
-    let memberTagHtml = "";
-    for (const tag of member.tags) {
-      memberTagHtml += `
-    <li class="tag-link tag-${tag}"><a href=""><span class="sr-only">${tag}</span>#${tag}</a></li>
-    `;
-    }
-    const template = `
-        <div class="member" id="${member.id}">
-          <a class="member-header">
-            <div class="member-image">
-                <img src="images/members-photos/${member.portrait}" alt="" class="member-logo" />
-            </div>
-            <h2 class="member-name">${member.name}</h2>
-          </a>
-          <div class="member-description">
-            <h3 class="member-location">${member.city}, ${member.country}</h3>
-            <h4 class="member-message">${member.tagline}</h4>
-            <h5 class="member-price">${member.price}€/jour</h5>
-          </div>
-          <div class="member-tags">
-            <ul class="member-tags-list">
-            ${memberTagHtml}
-            </ul>
-          </div>
-        </div>
-`;
-    htmlMembers += template;
+    htmlMembers += member.getTemplate();
   }
   document.getElementById("photographer-list").innerHTML = htmlMembers;
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
-  chargeMembers();
-  addEventListenerToDifferentTagLink();
-  document.querySelector(".header-link").addEventListener("click", (e) => {
-    e.preventDefault();
-    const membersElements = document.querySelectorAll(".member");
-    for (const memberElement of membersElements) {
-      memberElement.style.display = "";
-    }
-  });
-});
+
 
 function addEventListenerToDifferentTagLink() {
   const items = document.getElementsByClassName("tag-link");
@@ -79,90 +46,65 @@ function addEventListenerToDifferentTagLink() {
   }
 }
 function orderMembers(e, tag) {
-  const membersElements = document.querySelectorAll(".member");
+  e.stopPropagation();
   e.preventDefault();
   switch (tag) {
     case "portrait":
-      for (const memberElement of membersElements) {
-        if (memberElement.querySelector(".tag-portrait") === null) {
-          memberElement.style.display = "none";
-        } else {
-          memberElement.style.display = "";
-        }
-      }
+      membersJson = data.photographers.filter(function (item) {
+        return item.tags.includes("portrait");
+      });
 
       break;
     case "fashion":
-      for (const memberElement of membersElements) {
-        if (memberElement.querySelector(".tag-fashion") === null) {
-          memberElement.style.display = "none";
-        } else {
-          memberElement.style.display = "";
-        }
-      }
+      membersJson = data.photographers.filter(function (item) {
+        return item.tags.includes("fashion");
+      });
 
       break;
     case "art":
-      for (const memberElement of membersElements) {
-        if (memberElement.querySelector(".tag-art") === null) {
-          memberElement.style.display = "none";
-        } else {
-          memberElement.style.display = "";
-        }
-      }
+      membersJson = data.photographers.filter(function (item) {
+        return item.tags.includes("art");
+      });
 
       break;
     case "architecture":
-      for (const memberElement of membersElements) {
-        if (memberElement.querySelector(".tag-architecture") === null) {
-          memberElement.style.display = "none";
-        } else {
-          memberElement.style.display = "";
-        }
-      }
+      membersJson = data.photographers.filter(function (item) {
+        return item.tags.includes("architecture");
+      });
 
       break;
     case "travel":
-      for (const memberElement of membersElements) {
-        if (memberElement.querySelector(".tag-travel") === null) {
-          memberElement.style.display = "none";
-        } else {
-          memberElement.style.display = "";
-        }
-      }
+      membersJson = data.photographers.filter(function (item) {
+        return item.tags.includes("travel");
+      });
 
       break;
     case "sports":
-      for (const memberElement of membersElements) {
-        if (memberElement.querySelector(".tag-sports") === null) {
-          memberElement.style.display = "none";
-        } else {
-          memberElement.style.display = "";
-        }
-      }
+      membersJson = data.photographers.filter(function (item) {
+        return item.tags.includes("sports");
+      });
 
       break;
     case "animals":
-      for (const memberElement of membersElements) {
-        if (memberElement.querySelector(".tag-animals") === null) {
-          memberElement.style.display = "none";
-        } else {
-          memberElement.style.display = "";
-        }
-      }
+      membersJson = data.photographers.filter(function (item) {
+        return item.tags.includes("animals");
+      });
 
       break;
     case "events":
-      for (const memberElement of membersElements) {
-        if (memberElement.querySelector(".tag-events") === null) {
-          memberElement.style.display = "none";
-        } else {
-          memberElement.style.display = "";
-        }
-      }
+      membersJson = data.photographers.filter(function (item) {
+        return item.tags.includes("events");
+      });
 
       break;
     default:
       break;
   }
+  chargeMembers();
+  addEventListenerToDifferentTagLink();
 }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  chargeMembers();
+  addEventListenerToDifferentTagLink();
+});
