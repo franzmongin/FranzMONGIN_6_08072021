@@ -9,8 +9,7 @@ let members = [];
 // chargement des photographes
 function chargeMembers() {
   members = [];
-  console.log(membersJson);
-  
+
   for (let i = 0; i < membersJson.length; i++) {
     members.push(factory.createMember(membersJson[i]));
   }
@@ -20,8 +19,6 @@ function chargeMembers() {
   }
   document.getElementById("photographer-list").innerHTML = htmlMembers;
 }
-
-
 
 function addEventListenerToDifferentTagLink() {
   const items = document.getElementsByClassName("tag-link");
@@ -103,8 +100,17 @@ function orderMembers(e, tag) {
   chargeMembers();
   addEventListenerToDifferentTagLink();
 }
+let mainY = document.querySelector(".main").offsetTop;
 
+// gestion du bouton apparaissant quand le scroll dépasse la balise main
 document.addEventListener("DOMContentLoaded", function (event) {
   chargeMembers();
   addEventListenerToDifferentTagLink();
+  window.addEventListener("scroll", function (e) {
+    if (window.scrollY > mainY) {
+      document.querySelector(".back-to-main-div").style.display = "flex";
+    } else {
+      document.querySelector(".back-to-main-div").style.display = "none";
+    }
+  });
 });
