@@ -18,7 +18,7 @@ export default class Member {
     }
     return `
         <div class="member" id="${this.id}">
-          <a class="member-header">
+          <a href="" class="member-header">
             <div class="member-image">
                 <img src="images/members-photos/${this.portrait}" alt="" class="member-logo" />
             </div>

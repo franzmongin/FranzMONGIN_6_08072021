@@ -22,16 +22,13 @@ body {
   .navigation {
     min-width: 380px;
     flex-grow: 1;
-    .tags-list {
+    &-tags-list {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       column-gap: 6px;
       row-gap: 6px;
     }
-  }
-  .invisible-div {
-    width: 306px;
   }
 }
 .main {
@@ -51,7 +48,7 @@ body {
   #photographer-list {
     display: flex;
     flex-wrap: wrap;
-    row-gap: 20px;
+    row-gap: 50px;
     padding: 0 20px;
     .member {
       flex-basis: 33%;
@@ -76,7 +73,7 @@ body {
           }
         }
         .member-name {
-          font-size: 2.88em;
+          font-size: 2.25em;
           color: $secondary-color;
           text-align: center;
         }
@@ -88,7 +85,7 @@ body {
         row-gap: 10px;
         margin-bottom: 10px;
         .member-location {
-          font-size: 0.8em;
+          font-size: 0.8125em;
           color: $primary-color;
         }
         .member-message {
@@ -104,6 +101,7 @@ body {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
+          column-gap: 6px;
         }
       }
     }
