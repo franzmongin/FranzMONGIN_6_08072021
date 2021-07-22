@@ -3,7 +3,8 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    app: "./index.js",
+    homepage: "./js/homepage.js",
+    memberpage: "./js/memberpage.js",
     polyfill: "babel-polyfill",
   },
   output: {
