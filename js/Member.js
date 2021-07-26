@@ -91,7 +91,7 @@ export default class Member {
       `;
       }
     }
-    
+
     return `
     <section class="member-presentation">
           <div class="member-description">
@@ -128,13 +128,15 @@ export default class Member {
             ${photosHtml}
           </div>
         </section>
-      ${modalHtml}
     `;
   }
-  getModalTemplate(){
-     return `
+  getModalTemplate() {
+    return `
         <div class="content">
+          <p class="modal-header">Contactez-moi</br>
+          ${this.name}
           <span class="close"></span>
+          </p>
           <div class="modal-body">
             <div id="form-confirmation">
               <p id="form-confirmation-message">
@@ -179,15 +181,20 @@ export default class Member {
                 <input class="text-control" id="email" name="email" /><br />
                 <p id="email-validation" class="form-validation"></p>
               </div>
+              <div class="formData">
+                <label for="message">Votre message</label><br />
+                <textarea rows="5" class="text-control" form="modal-form" id="message" name="message" /></textarea><br />
+                <p id="message-validation" class="form-validation"></p>
+              </div>
 
               <input
                 class="btn-submit button"
                 type="submit"
-                value="C'est parti"
+                value="Envoyer"
               />
             </form>
           </div>
       </div>
-    `
+    `;
   }
 }

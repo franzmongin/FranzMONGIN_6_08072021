@@ -193,62 +193,71 @@
       }
     }
   }
-  // modal form 
-  .member-modal{
+  // modal form
+  .member-modal {
     display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      overflow: auto;
-      background-color: white;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background: rgba(196, 196, 196, 0.4);
     .button {
       background: #fe142f;
       margin-top: 0.5em;
-      padding: 1em;
       color: #fff;
       border-radius: 15px;
       cursor: pointer;
       font-size: 16px;
     }
-    
+
     .button:hover {
       background: #3876ac;
     }
-    
+
     .smFont {
       font-size: 16px;
     }
-    
+
     .content {
       margin: 5% auto;
+      padding: 15px 5%;
       width: 100%;
       max-width: 500px;
       animation-name: modalopen;
       animation-duration: var(--modal-duration);
-      background: #232323;
+      background: $tertiary-color;
       border-radius: 10px;
       overflow: hidden;
       position: relative;
-      color: #fff;
+      color: black;
       padding-top: 10px;
+      .modal-header {
+        font-size: 4em;
+        position: relative;
+        margin-bottom: 40px;
+      }
     }
-    
+
     .modal-body {
-      padding: 15px 8%;
+      // padding: 15px 8%;
       margin: 15px auto;
-      min-height: 849px;
+      form {
+        .formData {
+          margin-bottom: 10px;
+        }
+      }
     }
     label {
       font-family: var(--font-default);
-      font-size: 17px;
+      font-size: 2.25em;
       font-weight: normal;
       display: inline-block;
-      margin-bottom: 11px;
+      margin-bottom: 5px;
     }
-    input {
+    input:not(.button) {
       padding: 8px;
       border: 0.8px solid #ccc;
       outline: none;
@@ -259,7 +268,11 @@
       width: 100%;
       border-radius: 8px;
       font-size: 20px;
-      height: 48px;
+      height: 68px;
+      box-sizing: border-box;
+    }
+    textarea.text-control {
+      height: inherit;
     }
     .formData[data-error]::after {
       content: attr(data-error);
@@ -363,7 +376,7 @@
     }
     .close {
       position: absolute;
-      right: 15px;
+      right: 0;
       top: 15px;
       width: 32px;
       height: 32px;
@@ -376,8 +389,8 @@
       position: absolute;
       left: 15px;
       content: " ";
-      height: 33px;
-      width: 3px;
+      height: 40px;
+      width: 6px;
       background-color: #fff;
     }
     .close:before {
@@ -388,15 +401,17 @@
     }
     .btn-submit,
     .btn-signup {
-      background: #fe142f;
-      display: block;
-      margin: 0 auto;
+      background: $primary-color;
+      display: flex;
+      justify-content: center;
+      align-self: center;
       border-radius: 7px;
       font-size: 1rem;
-      padding: 12px 82px;
       color: #fff;
       cursor: pointer;
       border: 0;
+      width: 170px;
+      height: 69px;
     }
   }
 }
