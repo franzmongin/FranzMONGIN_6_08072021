@@ -133,11 +133,12 @@ export default class Member {
   getModalTemplate() {
     return `
         <div class="content">
+          
+          <div class="modal-body" id="modal-body">
           <p class="modal-header">Contactez-moi</br>
           ${this.name}
           <span class="close"></span>
           </p>
-          <div class="modal-body">
             <div id="form-confirmation">
               <p id="form-confirmation-message">
                 Merci ! Votre réservation a été reçue

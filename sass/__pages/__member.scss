@@ -86,9 +86,8 @@
         display: flex;
         width: 100%;
         flex-wrap: wrap;
-        // column-gap: 0.5%;
         row-gap: 20px;
-        justify-content: space-between;
+        margin-left: 0.33%;
         @media screen and (max-width: 1199px) {
           justify-content: space-evenly;
         }
@@ -109,6 +108,7 @@
           display: flex;
           box-sizing: border-box;
           justify-content: center;
+          margin-right: 0.33%;
           .list-item-content {
             @media screen and (max-width: 400px) {
               width: 89.33vw;
@@ -247,6 +247,9 @@
       form {
         .formData {
           margin-bottom: 10px;
+          .form-validation {
+            font-size: 2em;
+          }
         }
       }
     }
@@ -299,6 +302,7 @@
     }
     #form-confirmation-message {
       margin: auto;
+      font-size: 2em;
     }
     .form-validation {
       color: red;
@@ -405,6 +409,7 @@
       display: flex;
       justify-content: center;
       align-self: center;
+      align-items: center;
       border-radius: 7px;
       font-size: 1rem;
       color: #fff;
