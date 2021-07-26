@@ -24,6 +24,8 @@ member.medias = memberMedias;
 let htmlMemberPage = member.getMemberTemplate();
 let modalHtmlMember = member.getModalTemplate();
 
+let totalLikes;
+
 // chargement des photographes
 function chargePage() {
   document.getElementById("main-div").innerHTML = htmlMemberPage;
@@ -151,9 +153,19 @@ function chargeModal() {
   }
 }
 
+//add like
+function chargesLikesAndPrice() {
+  let likesAndPriceHtml = `
+    <div class="likes" id="likes">${member.likes}<img src="../images/icons/heart_black.svg"/></div>
+    <div class="price" id="price">${member.price}€/jour</div>
+  `;
+  document.getElementById("likes-and-price").innerHTML = likesAndPriceHtml;
+}
+
 // once document is loaded do this
 document.addEventListener("DOMContentLoaded", function (event) {
   chargePage();
+  chargesLikesAndPrice();
   chargeModal();
   checkFields();
 });

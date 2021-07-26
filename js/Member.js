@@ -9,6 +9,7 @@ export default class Member {
     this.tags = data.tags;
     this.portrait = data.portrait;
     this.medias;
+    this.likes = 0;
   }
   getTemplate() {
     let memberTagHtml = "";
@@ -63,11 +64,14 @@ export default class Member {
                 </div>
                 <h6>${media.title}</h6>
                 <div class="like-div">
-                  <span class="like-counter">12</span><img src="./images/icons/heart.svg" alt="" />
+                  <span class="like-counter">${
+                    media.likes
+                  }</span><img src="./images/icons/heart.svg" alt="" />
                 </div>
               </div>
             </div>
       `;
+        this.likes += media.likes;
       } else {
         photosHtml += `
         <div class="list-item">
@@ -84,15 +88,19 @@ export default class Member {
                 </div>
                 <h6>${media.title}</h6>
                 <div class="like-div">
-                  <span class="like-counter">12</span><img src="./images/icons/heart.svg" alt="" />
+                  <span class="like-counter">${
+                    media.likes
+                  }</span><img src="./images/icons/heart.svg" alt="" />
                 </div>
               </div>
             </div>
       `;
+        this.likes += media.likes;
       }
     }
 
     return `
+    <div>${this.likes}</div>
     <section class="member-presentation">
           <div class="member-description">
             <h1>${this.name}</h1>
@@ -118,11 +126,10 @@ export default class Member {
         <section class="photo-list-section">
           <div class="list-ordering">
             <span>Trier par</span
-            ><select name="ordering-photo" id="ordering-photo">
-              <option value="popularity">Popularité</option>
-              <option value="date">Date</option>
-              <option value="title">Titre</option>
-            </select>
+            >
+            <div class= "order-collapse">
+
+            </div>
           </div>
           <div class="list">
             ${photosHtml}
@@ -135,10 +142,10 @@ export default class Member {
         <div class="content">
           
           <div class="modal-body" id="modal-body">
-          <p class="modal-header">Contactez-moi</br>
+          <h1 class="modal-header">Contactez-moi</br>
           ${this.name}
           <span class="close"></span>
-          </p>
+          </h1>
             <div id="form-confirmation">
               <p id="form-confirmation-message">
                 Merci ! Votre réservation a été reçue
@@ -184,7 +191,7 @@ export default class Member {
               </div>
               <div class="formData">
                 <label for="message">Votre message</label><br />
-                <textarea rows="5" class="text-control" form="modal-form" id="message" name="message" /></textarea><br />
+                <textarea class="text-control" form="modal-form" id="message" name="message" /></textarea><br />
                 <p id="message-validation" class="form-validation"></p>
               </div>
 
