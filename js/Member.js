@@ -39,7 +39,6 @@ export default class Member {
   `;
   }
   getMemberTemplate() {
-    console.log(this);
     let memberTagHtml = "";
     for (const tag of this.tags) {
       memberTagHtml += `
@@ -50,7 +49,6 @@ export default class Member {
     }
     let photosHtml = "";
     for (const media of this.medias) {
-      console.log(media);
       if (media.video) {
         photosHtml += `
         <div class="list-item">
@@ -93,11 +91,12 @@ export default class Member {
       `;
       }
     }
+    
     return `
     <section class="member-presentation">
           <div class="member-description">
             <h1>${this.name}</h1>
-            <button class="contact-me">Contactez-moi</button>
+            <button class="contact-me modal-btn">Contactez-moi</button>
             <h3 class="member-location">${this.city}, ${this.country}</h3>
             <h4 class="member-message">Voir le beau dans le quotidien</h4>
             <div class="member-tags">
@@ -129,6 +128,66 @@ export default class Member {
             ${photosHtml}
           </div>
         </section>
+      ${modalHtml}
     `;
+  }
+  getModalTemplate(){
+     return `
+        <div class="content">
+          <span class="close"></span>
+          <div class="modal-body">
+            <div id="form-confirmation">
+              <p id="form-confirmation-message">
+                Merci ! Votre réservation a été reçue
+              </p>
+              <button
+                class="btn-submit button"
+                id="confirmation-close"
+                value="Close"
+              >
+                Fermer
+              </button>
+            </div>
+            <form
+              name="reserve"
+              action="index.html"
+              method="get"
+              id="modal-form"
+            >
+              <div class="formData">
+                <label for="first-name">Prénom</label><br />
+                <input
+                  class="text-control"
+                  type="text"
+                  id="first-name"
+                  name="first-name"
+                /><br />
+                <p id="first-name-validation" class="form-validation"></p>
+              </div>
+              <div class="formData">
+                <label for="last-name">Nom</label><br />
+                <input
+                  class="text-control"
+                  type="text"
+                  id="last-name"
+                  name="last-name"
+                /><br />
+                <p id="last-name-validation" class="form-validation"></p>
+              </div>
+              <div class="formData">
+                <label for="email">E-mail</label><br />
+                <input class="text-control" id="email" name="email" /><br />
+                <p id="email-validation" class="form-validation"></p>
+              </div>
+
+              <input
+                class="btn-submit button"
+                type="submit"
+                value="C'est parti"
+              />
+            </form>
+          </div>
+      </div>
+    `
   }
 }
