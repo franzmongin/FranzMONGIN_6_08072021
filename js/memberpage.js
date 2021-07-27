@@ -21,13 +21,11 @@ let memberMedias = medias.filter((media) => {
 });
 member.medias = memberMedias;
 
-let htmlMemberPage = member.getMemberTemplate();
-let modalHtmlMember = member.getModalTemplate();
-
-let totalLikes;
-
 // chargement des photographes
-function chargePage() {
+function chargeMainDiv() {
+  // console.log(member.medias);
+  let htmlMemberPage = member.getMemberTemplate();
+  let modalHtmlMember = member.getModalTemplate();
   document.getElementById("main-div").innerHTML = htmlMemberPage;
   document.getElementById("member-modal").innerHTML = modalHtmlMember;
 }
@@ -61,39 +59,6 @@ function checkFields() {
       document.getElementById(fieldName + "-validation").innerText =
         errorMessages[fieldName];
       formValidationsResults[fieldName] = false;
-    }
-  }
-
-  // location validation
-  function checkLocation() {
-    let valid = false;
-    let locations = document.getElementsByName("location");
-    for (let location of locations) {
-      if (location.checked) {
-        valid = true;
-      }
-    }
-    if (valid) {
-      document.getElementById("location-validation").innerText = "";
-      formValidationsResults["location"] = true;
-    } else {
-      document.getElementById("location-validation").innerText =
-        errorMessages.location;
-      formValidationsResults["location"] = false;
-    }
-  }
-
-  // conditions validation
-  function checkConditions() {
-    document.getElementById("checkbox1").checked
-      ? (document.getElementById("conditions-validation").innerText = "")
-      : (document.getElementById("conditions-validation").innerText =
-          errorMessages.conditions);
-    if (document.getElementById("checkbox1").checked) {
-      document.getElementById("conditions-validation").innerText = "";
-      formValidationsResults["conditions"] = true;
-    } else {
-      formValidationsResults["conditions"] = false;
     }
   }
 
@@ -154,7 +119,7 @@ function chargeModal() {
 }
 
 //fixed likesandprices
-function chargesLikesAndPrice() {
+function chargesLikesAndPriceDiv() {
   let likesAndPriceHtml = `
     <div class="likes" id="likes"><span id="member-total-likes">${member.likes}</span><img src="../images/icons/heart_black.svg"/></div>
     <div class="price" id="price">${member.price}€/jour</div>
@@ -183,11 +148,117 @@ function addLikeCounterEvent() {
     });
   }
 }
+
+function orderList() {
+  function openOrderChoices() {
+    document.querySelectorAll(".order-element--active").forEach((e) => {
+      e.addEventListener("click", function () {
+        console.log(document.querySelector(".order-oppened").style.display);
+        if (document.querySelector(".order-oppened").style.display === "flex") {
+          document.querySelector(".order-oppened").style.display = "none";
+        } else {
+          document.querySelector(".order-oppened").style.display = "flex";
+        }
+      });
+    });
+  }
+  function orderPhotos() {
+    document.querySelectorAll(".order-element--inactive").forEach((el) => {
+      el.addEventListener("click", () => {
+        let id = el.id;
+        switch (id) {
+          case "order-date":
+            member.medias.sort((a, b) => {
+              return new Date(b.date) - new Date(a.date);
+            });
+
+            recharge();
+            changeOrderlistAfter("date");
+            orderList();
+            break;
+          case "order-popularity":
+            member.medias.sort((a, b) => (a.likes < b.likes ? 1 : -1));
+            recharge();
+            changeOrderlistAfter("popularity");
+            orderList();
+            break;
+          case "order-title":
+            member.medias.sort((a, b) => (a.title > b.title ? 1 : -1));
+            recharge();
+            changeOrderlistAfter("title");
+            orderList();
+            break;
+          default:
+            break;
+        }
+      });
+    });
+  }
+  function changeOrderlistAfter(choice) {
+    let templateOrderChoices = "";
+    switch (choice) {
+      case "date":
+        templateOrderChoices = `
+            <span>Trier par</span
+            >
+            <div class= "order-collapse" id="">
+              <div class="order-element order-element--active">Date<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
+              <div class= "order-oppened" id="">
+                <div class="order-element order-element--active" id="order-date">Date<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></div>
+                <div class="order-element order-element--inactive" id="order-popularity">Popularité</div>
+                <div class="order-element order-element--inactive" id="order-title">Titre</div>
+              </div>
+            </div>
+        `;
+        break;
+      case "title":
+        templateOrderChoices = `
+            <span>Trier par</span
+            >
+            <div class= "order-collapse" id="">
+              <div class="order-element order-element--active">Titre<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
+              <div class= "order-oppened" id="">
+                <div class="order-element order-element--active" id="order-title">Titre<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></div>
+                <div class="order-element order-element--inactive" id="order-popularity">Popularité</div>
+                <div class="order-element order-element--inactive" id="order-date">Date</div>
+              </div>
+            </div>
+        `;
+        break;
+      case "popularity":
+        templateOrderChoices = `
+            <span>Trier par</span
+            >
+            <div class= "order-collapse" id="">
+              <div class="order-element order-element--active">Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
+              <div class= "order-oppened" id="">
+                <div class="order-element order-element--active" id="order-popularité">Popularité<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></div>
+                <div class="order-element order-element--inactive" id="order-title">Titre</div>
+                <div class="order-element order-element--inactive" id="order-date">Date</div>
+              </div>
+            </div>
+        `;
+        break;
+      default:
+        break;
+    }
+    document.querySelector(".list-ordering").innerHTML = templateOrderChoices;
+  }
+  openOrderChoices();
+  orderPhotos();
+}
 // once document is loaded do this
 document.addEventListener("DOMContentLoaded", function (event) {
-  chargePage();
-  chargesLikesAndPrice();
+  chargeMainDiv();
+  chargesLikesAndPriceDiv();
   addLikeCounterEvent();
+  orderList();
   chargeModal();
   checkFields();
 });
+function recharge() {
+  chargeMainDiv();
+  addLikeCounterEvent();
+  chargeModal();
+  checkFields();
+}

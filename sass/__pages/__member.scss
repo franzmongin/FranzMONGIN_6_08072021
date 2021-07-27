@@ -110,6 +110,46 @@
       flex-wrap: wrap;
       .list-ordering {
         flex-basis: 100%;
+        display: flex;
+        column-gap: 20px;
+        align-items: center;
+        .order-collapse {
+          background-color: $primary-color;
+          color: white;
+          border-radius: 5px;
+          display: flex;
+          position: relative;
+          width: 170px;
+          .arrow {
+            width: 10px;
+            height: 10px;
+          }
+        }
+        .order-element {
+          display: flex;
+          justify-content: space-between;
+          flex-basis: 100%;
+          padding: 10px 5px;
+          margin: 0 10px;
+          align-items: center;
+        }
+        .order-oppened {
+          background-color: $primary-color;
+          color: white;
+          top: 0;
+          display: none;
+          flex-direction: column;
+          border-radius: 5px;
+          z-index: 5;
+          position: absolute;
+          width: 170px;
+          // top: 40px;
+
+          :nth-child(2) {
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+          }
+        }
       }
       .list {
         display: flex;

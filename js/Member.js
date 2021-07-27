@@ -132,9 +132,15 @@ export default class Member {
           <div class="list-ordering">
             <span>Trier par</span
             >
-            <div class= "order-collapse">
-
+            <div class= "order-collapse" id="">
+              <div class="order-element order-element--active">Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
+              <div class= "order-oppened" id="">
+                <div class="order-element order-element--active" id="order-popularity">Popularité<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></div>
+                <div class="order-element order-element--inactive" id="order-date">Date</div>
+                <div class="order-element order-element--inactive" id="order-title">Titre</div>
+              </div>
             </div>
+            
           </div>
           <div class="list">
             ${photosHtml}
