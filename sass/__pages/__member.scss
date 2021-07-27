@@ -40,8 +40,11 @@
       background-color: #fafafa;
       padding: 56px 50px;
       border-radius: 5px;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
       .member-description {
+        @media screen and (max-width: 768px) {
+          flex-basis: 70%;
+        }
         flex-basis: 50%;
         display: flex;
         flex-wrap: wrap;
@@ -83,6 +86,9 @@
       }
       .member-avatar {
         flex-basis: 50%;
+        @media screen and (max-width: 768px) {
+          flex-basis: 30%;
+        }
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -260,7 +266,7 @@
       .modal-header {
         font-size: 4em;
         position: relative;
-        margin-bottom: 40px;
+        margin-bottom: 25px;
       }
     }
 

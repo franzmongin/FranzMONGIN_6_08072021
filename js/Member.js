@@ -50,6 +50,7 @@ export default class Member {
     }
     let photosHtml = "";
     for (const media of this.medias) {
+      // pour les vidéos
       if (media.video) {
         photosHtml += `
         <div class="list-item">
@@ -64,17 +65,20 @@ export default class Member {
                 </div>
                 <h6>${media.title}</h6>
                 <div class="like-div">
-                  <span class="like-counter">${
-                    media.likes
-                  }</span><img src="./images/icons/heart.svg" alt="" />
+                  <span class="like-counter like-counter-${media.id}">${
+          media.likes
+        }</span><img src="./images/icons/heart.svg" alt="" class="like-photo-button like-photo-button-${
+          media.id
+        }" />
                 </div>
               </div>
             </div>
       `;
         this.likes += media.likes;
+        // pour les images simples
       } else {
         photosHtml += `
-        <div class="list-item">
+        <div class="list-item list-item-${this.id}">
               <div class="list-item-content">
                 <div class="item-image">
                   <img
@@ -88,9 +92,11 @@ export default class Member {
                 </div>
                 <h6>${media.title}</h6>
                 <div class="like-div">
-                  <span class="like-counter">${
-                    media.likes
-                  }</span><img src="./images/icons/heart.svg" alt="" />
+                  <span class="like-counter like-counter-${media.id}">${
+          media.likes
+        }</span><img src="./images/icons/heart.svg" alt="" class="like-photo-button like-photo-button-${
+          media.id
+        }" />
                 </div>
               </div>
             </div>
@@ -100,7 +106,6 @@ export default class Member {
     }
 
     return `
-    <div>${this.likes}</div>
     <section class="member-presentation">
           <div class="member-description">
             <h1>${this.name}</h1>

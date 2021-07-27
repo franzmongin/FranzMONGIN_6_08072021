@@ -153,19 +153,41 @@ function chargeModal() {
   }
 }
 
-//add like
+//fixed likesandprices
 function chargesLikesAndPrice() {
   let likesAndPriceHtml = `
-    <div class="likes" id="likes">${member.likes}<img src="../images/icons/heart_black.svg"/></div>
+    <div class="likes" id="likes"><span id="member-total-likes">${member.likes}</span><img src="../images/icons/heart_black.svg"/></div>
     <div class="price" id="price">${member.price}€/jour</div>
   `;
   document.getElementById("likes-and-price").innerHTML = likesAndPriceHtml;
 }
 
+// like photo event
+function addLikeCounterEvent() {
+  for (const item of document.getElementsByClassName("like-photo-button")) {
+    let itemClasses = [];
+    for (let value of item.classList.values()) {
+      itemClasses.push(value);
+    }
+    let itemId = itemClasses
+      .filter((el) => el.includes("like-photo-button-"))[0]
+      .split("like-photo-button-")[1];
+    item.addEventListener("click", function () {
+      document.getElementById("member-total-likes").innerText = parseInt(
+        parseInt(document.getElementById("member-total-likes").textContent) + 1
+      );
+      document.querySelector(".like-counter-" + itemId).innerText =
+        parseInt(
+          document.querySelector(".like-counter-" + itemId).textContent
+        ) + 1;
+    });
+  }
+}
 // once document is loaded do this
 document.addEventListener("DOMContentLoaded", function (event) {
   chargePage();
   chargesLikesAndPrice();
+  addLikeCounterEvent();
   chargeModal();
   checkFields();
 });
