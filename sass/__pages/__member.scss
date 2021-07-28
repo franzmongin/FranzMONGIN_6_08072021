@@ -530,4 +530,51 @@
       }
     }
   }
+
+  // lightbox modal
+  .lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background: white;
+    justify-content: center;
+    align-items: center;
+    .lightbox-content {
+      width: 80%;
+      height: 80%;
+      background: white;
+      position: relative;
+      padding: 0 60px;
+      .lightbox-image-tag {
+        width: 100%;
+        height: 100%;
+        img,
+        video {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .cross-icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .left-icon {
+        position: absolute;
+        top: 50%;
+        left: 0;
+      }
+      .right-icon {
+        position: absolute;
+        top: 50%;
+        right: 0;
+      }
+    }
+  }
 }

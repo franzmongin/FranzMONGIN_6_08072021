@@ -20,10 +20,10 @@ let memberMedias = medias.filter((media) => {
   return media.photographerId === parseInt(memberId);
 });
 member.medias = memberMedias;
+let mediaCounter = member.medias.length;
 
 // chargement des photographes
 function chargeMainDiv() {
-  // console.log(member.medias);
   let htmlMemberPage = member.getMemberTemplate();
   let modalHtmlMember = member.getModalTemplate();
   document.getElementById("main-div").innerHTML = htmlMemberPage;
@@ -153,7 +153,6 @@ function orderList() {
   function openOrderChoices() {
     document.querySelectorAll(".order-element--active").forEach((e) => {
       e.addEventListener("click", function () {
-        console.log(document.querySelector(".order-oppened").style.display);
         if (document.querySelector(".order-oppened").style.display === "flex") {
           document.querySelector(".order-oppened").style.display = "none";
         } else {
@@ -247,6 +246,117 @@ function orderList() {
   openOrderChoices();
   orderPhotos();
 }
+function openLightbox() {
+  //open modal lightbox
+  document.querySelectorAll(".item-image-tag").forEach((el) => {
+    let elementType = el.tagName;
+
+    if (elementType === "IMG") {
+      let source = el.getAttribute("src");
+      let photoPlaceInList = el.getAttribute("data-placeinlist");
+      el.addEventListener("click", function () {
+        document.querySelector(".lightbox-modal").style.display = "flex";
+        document.querySelector(
+          ".lightbox-image-tag"
+        ).innerHTML = ` <img src="${source}" class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="">`;
+      });
+    } else {
+      let source = el.querySelector("source").getAttribute("src");
+      let photoPlaceInList = el.getAttribute("data-placeinlist");
+      el.addEventListener("click", function () {
+        document.querySelector(".lightbox-modal").style.display = "flex";
+        document.querySelector(
+          ".lightbox-image-tag"
+        ).innerHTML = ` <video class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="">
+        <source src="${source}"
+        <video/>
+        `;
+      });
+    }
+  });
+}
+// LIGHTBOX
+function chargeLightBox() {
+  //close modal lightbox
+  document.querySelector(".close-lightbox").addEventListener("click", () => {
+    document.querySelector(".lightbox-modal").style.display = "none";
+  });
+
+  // previous modal lightbox
+  document.querySelector(".previous-lightbox").addEventListener("click", () => {
+    console.log("coucou");
+    let photoPlaceInList = document
+      .querySelector(".current-lightbox-image")
+      .getAttribute("data-placeinlist");
+    let previousPlaceInList =
+      parseInt(photoPlaceInList) - 1 < 1
+        ? mediaCounter
+        : parseInt(photoPlaceInList) - 1;
+    let searchedAttribute = `[data-placeInList='${previousPlaceInList}']`;
+    let previousMediaElement = document.querySelector(searchedAttribute);
+    // if previous media is an image
+    if (previousMediaElement.tagName === "IMG") {
+      let previousMediaSource = document
+        .querySelector(searchedAttribute)
+        .getAttribute("src");
+      document.querySelector(
+        ".lightbox-image-tag"
+      ).innerHTML = ` <img src="${previousMediaSource}" class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="">`;
+    } else {
+      // if previous media is a video
+      let previousMediaSource = document
+        .querySelector(searchedAttribute)
+        .querySelector("source")
+        .getAttribute("src");
+      document.querySelector(
+        ".lightbox-image-tag"
+      ).innerHTML = ` <video class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="">
+        <source src="${previousMediaSource}"
+        <video/>
+        `;
+    }
+  });
+
+  // next modal lightbox
+  document
+    .querySelector(".next-lightbox")
+    .addEventListener("click", nextLightBoxHandler);
+  function nextLightBoxHandler() {
+    let photoPlaceInList = document
+      .querySelector(".current-lightbox-image")
+      .getAttribute("data-placeinlist");
+    let nextPlaceInList =
+      parseInt(photoPlaceInList) + 1 > mediaCounter
+        ? 1
+        : parseInt(photoPlaceInList) + 1;
+    let searchedAttribute = `[data-placeInList='${nextPlaceInList}']`;
+    console.log(searchedAttribute);
+    let nextMediaElement = document.querySelector(searchedAttribute);
+    // if next media is an image
+    if (nextMediaElement.tagName === "IMG") {
+      let nextMediaSource = document
+        .querySelector(searchedAttribute)
+        .getAttribute("src");
+      document.querySelector(
+        ".lightbox-image-tag"
+      ).innerHTML = ` <img src="${nextMediaSource}" class="current-lightbox-image" data-placeInList="${nextPlaceInList}" alt="">`;
+    } else {
+      // if next media is a video
+      let nextMediaSource = document
+        .querySelector(searchedAttribute)
+        .querySelector("source")
+        .getAttribute("src");
+      document.querySelector(
+        ".lightbox-image-tag"
+      ).innerHTML = ` <video class="current-lightbox-image" data-placeInList="${nextPlaceInList}" alt="">
+        <source src="${nextMediaSource}"
+        <video/>
+        `;
+    }
+  }
+  openLightbox();
+}
+
 // once document is loaded do this
 document.addEventListener("DOMContentLoaded", function (event) {
   chargeMainDiv();
@@ -255,10 +365,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
   orderList();
   chargeModal();
   checkFields();
+  chargeLightBox();
 });
 function recharge() {
   chargeMainDiv();
   addLikeCounterEvent();
   chargeModal();
   checkFields();
+  openLightbox();
 }

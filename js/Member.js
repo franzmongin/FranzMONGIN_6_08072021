@@ -49,14 +49,18 @@ export default class Member {
     `;
     }
     let photosHtml = "";
+    let photoPlaceInList = 0;
     for (const media of this.medias) {
+      photoPlaceInList += 1;
       // pour les vidéos
       if (media.video) {
         photosHtml += `
-        <div class="list-item">
+        <div class="list-item list-item-${
+          this.id
+        } list-item--${photoPlaceInList}">
               <div class="list-item-content">
                 <div class="item-image">
-                  <video controls class="item-image-tag">
+                  <video class="item-image-tag" data-placeInList="${photoPlaceInList}">
   <source src="./images/${this.name.split(" ").join("")}/${
           media.video
         }" type="video/mp4">
@@ -78,11 +82,13 @@ export default class Member {
         // pour les images simples
       } else {
         photosHtml += `
-        <div class="list-item list-item-${this.id}">
+        <div class="list-item list-item-${
+          this.id
+        } list-item--${photoPlaceInList}">
               <div class="list-item-content">
                 <div class="item-image">
                   <img
-                    class="item-image-tag"
+                    class="item-image-tag" data-placeInList="${photoPlaceInList}"
                     src="./images/${this.name.split(" ").join("")}/${
           media.image
         }"
