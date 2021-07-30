@@ -104,7 +104,7 @@ function chargeModal() {
 
   // launch modal form
   function launchModal() {
-    modalbg.style.display = "block";
+    modalbg.style.display = "flex";
     document.querySelector("#modal-form").style.display = "inherit";
     document.querySelector("#form-confirmation").style.display = "none";
   }
@@ -198,8 +198,7 @@ function orderList() {
     switch (choice) {
       case "date":
         templateOrderChoices = `
-            <span>Trier par</span
-            >
+            <span class="ordering-title">Trier par</span>
             <div class= "order-collapse" id="">
               <div class="order-element order-element--active">Date<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
               <div class= "order-oppened" id="">
@@ -212,8 +211,7 @@ function orderList() {
         break;
       case "title":
         templateOrderChoices = `
-            <span>Trier par</span
-            >
+            <span class="ordering-title">Trier par</span>
             <div class= "order-collapse" id="">
               <div class="order-element order-element--active">Titre<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
               <div class= "order-oppened" id="">
@@ -226,8 +224,7 @@ function orderList() {
         break;
       case "popularity":
         templateOrderChoices = `
-            <span>Trier par</span
-            >
+            <span class="ordering-title">Trier par</span>
             <div class= "order-collapse" id="">
               <div class="order-element order-element--active">Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
               <div class= "order-oppened" id="">
@@ -259,6 +256,11 @@ function openLightbox() {
         document.querySelector(
           ".lightbox-image-tag"
         ).innerHTML = ` <img src="${source}" class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="">`;
+        let titleSelector = `.image-title--${photoPlaceInList}`;
+        console.log(titleSelector);
+        document.querySelector(
+          ".lightbox-image-title"
+        ).innerText = document.querySelector(titleSelector).textContent;
       });
     } else {
       let source = el.querySelector("source").getAttribute("src");
@@ -271,6 +273,11 @@ function openLightbox() {
         <source src="${source}"
         <video/>
         `;
+        let titleSelector = `.image-title--${photoPlaceInList}`;
+        console.log(titleSelector);
+        document.querySelector(
+          ".lightbox-image-title"
+        ).innerText = document.querySelector(titleSelector).textContent;
       });
     }
   });
@@ -315,6 +322,11 @@ function chargeLightBox() {
         <video/>
         `;
     }
+    let titleSelector = `.image-title--${previousPlaceInList}`;
+        console.log(titleSelector);
+        document.querySelector(
+          ".lightbox-image-title"
+        ).innerText = document.querySelector(titleSelector).textContent;
   });
 
   // next modal lightbox
@@ -353,6 +365,11 @@ function chargeLightBox() {
         <video/>
         `;
     }
+    let titleSelector = `.image-title--${nextPlaceInList}`;
+        console.log(titleSelector);
+        document.querySelector(
+          ".lightbox-image-title"
+        ).innerText = document.querySelector(titleSelector).textContent;
   }
   openLightbox();
 }

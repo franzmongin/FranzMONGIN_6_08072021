@@ -67,7 +67,7 @@ export default class Member {
   Your browser does not support the video tag.
 </video>
                 </div>
-                <h6>${media.title}</h6>
+                <h6 class="image-title--${photoPlaceInList}">${media.title}</h6>
                 <div class="like-div">
                   <span class="like-counter like-counter-${media.id}">${
           media.likes
@@ -96,7 +96,7 @@ export default class Member {
                   />
                   
                 </div>
-                <h6>${media.title}</h6>
+                <h6 class="image-title--${photoPlaceInList}">${media.title}</h6>
                 <div class="like-div">
                   <span class="like-counter like-counter-${media.id}">${
           media.likes
