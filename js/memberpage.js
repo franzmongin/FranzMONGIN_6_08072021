@@ -107,6 +107,7 @@ function chargeModal() {
     modalbg.style.display = "flex";
     document.querySelector("#modal-form").style.display = "inherit";
     document.querySelector("#form-confirmation").style.display = "none";
+    document.querySelector('#first-name').focus();
   }
 
   // close modal form

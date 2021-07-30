@@ -43,8 +43,8 @@ export default class Member {
     let memberTagHtml = "";
     for (const tag of this.tags) {
       memberTagHtml += `
-    <li class="tag-link tag-${tag}">
-      <a href=""><span class="sr-only">${tag}</span>#${tag}</a>
+    <li class="tag-link tag-${tag.name}">
+      <a href="../index.html?tag=${tag}"><span class="sr-only">${tag}</span>#${tag}</a>
     </li>
     `;
     }

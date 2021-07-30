@@ -104,6 +104,7 @@ let mainY = document.querySelector(".main").offsetTop;
 
 // gestion du bouton apparaissant quand le scroll dépasse la balise main
 document.addEventListener("DOMContentLoaded", function (event) {
+  
   chargeMembers();
   addEventListenerToDifferentTagLink();
   window.addEventListener("scroll", function (e) {
@@ -114,5 +115,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
   });
    
-  
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var routeTag = url.searchParams.get("tag");
+  if(routeTag){
+    let tagName = ".tag-"+routeTag;
+    document.querySelector(tagName).click();
+  }
 });
