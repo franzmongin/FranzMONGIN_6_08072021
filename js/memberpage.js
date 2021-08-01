@@ -1,7 +1,6 @@
 import "../sass/main.scss";
 import * as data from "../data/photographers.json";
 import Factory from "./Factory";
-import "./memberModal";
 
 const factory = new Factory();
 let membersJson = data.photographers;
@@ -107,7 +106,7 @@ function chargeModal() {
     modalbg.style.display = "flex";
     document.querySelector("#modal-form").style.display = "inherit";
     document.querySelector("#form-confirmation").style.display = "none";
-    document.querySelector('#first-name').focus();
+    document.querySelector("#first-name").focus();
   }
 
   // close modal form
@@ -259,9 +258,8 @@ function openLightbox() {
         ).innerHTML = ` <img src="${source}" class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="">`;
         let titleSelector = `.image-title--${photoPlaceInList}`;
         console.log(titleSelector);
-        document.querySelector(
-          ".lightbox-image-title"
-        ).innerText = document.querySelector(titleSelector).textContent;
+        document.querySelector(".lightbox-image-title").innerText =
+          document.querySelector(titleSelector).textContent;
       });
     } else {
       let source = el.querySelector("source").getAttribute("src");
@@ -276,9 +274,8 @@ function openLightbox() {
         `;
         let titleSelector = `.image-title--${photoPlaceInList}`;
         console.log(titleSelector);
-        document.querySelector(
-          ".lightbox-image-title"
-        ).innerText = document.querySelector(titleSelector).textContent;
+        document.querySelector(".lightbox-image-title").innerText =
+          document.querySelector(titleSelector).textContent;
       });
     }
   });
@@ -324,10 +321,9 @@ function chargeLightBox() {
         `;
     }
     let titleSelector = `.image-title--${previousPlaceInList}`;
-        console.log(titleSelector);
-        document.querySelector(
-          ".lightbox-image-title"
-        ).innerText = document.querySelector(titleSelector).textContent;
+    console.log(titleSelector);
+    document.querySelector(".lightbox-image-title").innerText =
+      document.querySelector(titleSelector).textContent;
   });
 
   // next modal lightbox
@@ -367,10 +363,9 @@ function chargeLightBox() {
         `;
     }
     let titleSelector = `.image-title--${nextPlaceInList}`;
-        console.log(titleSelector);
-        document.querySelector(
-          ".lightbox-image-title"
-        ).innerText = document.querySelector(titleSelector).textContent;
+    console.log(titleSelector);
+    document.querySelector(".lightbox-image-title").innerText =
+      document.querySelector(titleSelector).textContent;
   }
   openLightbox();
 }
