@@ -39,7 +39,7 @@ export default class Member {
         </div>
   `;
   }
-  getMemberTemplate() {
+  getMemberTemplate(htmlMedias) {
     let memberTagHtml = "";
     for (const tag of this.tags) {
       memberTagHtml += `
@@ -47,68 +47,6 @@ export default class Member {
       <a href="../index.html?tag=${tag}"><span class="sr-only">${tag}</span>#${tag}</a>
     </li>
     `;
-    }
-    let photosHtml = "";
-    let photoPlaceInList = 0;
-    for (const media of this.medias) {
-      photoPlaceInList += 1;
-      // pour les vidéos
-      if (media.video) {
-        photosHtml += `
-        <div class="list-item list-item-${
-          this.id
-        } list-item--${photoPlaceInList}">
-              <div class="list-item-content">
-                <div class="item-image">
-                  <video class="item-image-tag" data-placeInList="${photoPlaceInList}">
-  <source src="./images/${this.name.split(" ").join("")}/${
-          media.video
-        }" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-                </div>
-                <h6 class="image-title--${photoPlaceInList}">${media.title}</h6>
-                <div class="like-div">
-                  <span class="like-counter like-counter-${media.id}">${
-          media.likes
-        }</span><img src="./images/icons/heart.svg" alt="" class="like-photo-button like-photo-button-${
-          media.id
-        }" />
-                </div>
-              </div>
-            </div>
-      `;
-        this.likes += media.likes;
-        // pour les images simples
-      } else {
-        photosHtml += `
-        <div class="list-item list-item-${
-          this.id
-        } list-item--${photoPlaceInList}">
-              <div class="list-item-content">
-                <div class="item-image">
-                  <img
-                    class="item-image-tag" data-placeInList="${photoPlaceInList}"
-                    src="./images/${this.name.split(" ").join("")}/${
-          media.image
-        }"
-                    alt=""
-                  />
-                  
-                </div>
-                <h6 class="image-title--${photoPlaceInList}">${media.title}</h6>
-                <div class="like-div">
-                  <span class="like-counter like-counter-${media.id}">${
-          media.likes
-        }</span><img src="./images/icons/heart.svg" alt="" class="like-photo-button like-photo-button-${
-          media.id
-        }" />
-                </div>
-              </div>
-            </div>
-      `;
-        this.likes += media.likes;
-      }
     }
 
     return `
@@ -149,7 +87,7 @@ export default class Member {
             
           </div>
           <div class="list">
-            ${photosHtml}
+            ${htmlMedias}
           </div>
         </section>
     `;

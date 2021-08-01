@@ -4,8 +4,11 @@ import Factory from "./Factory";
 
 const factory = new Factory();
 let membersJson = data.photographers;
-let medias = data.media;
-
+let mediaJson = data.media;
+let medias = [];
+for (let i = 0; i < mediaJson.length; i++) {
+  medias.push(factory.createMedia(mediaJson[i]));
+}
 var url_string = window.location.href;
 var url = new URL(url_string);
 var memberId = url.searchParams.get("id");
@@ -14,16 +17,22 @@ const memberData = membersJson.find(
   (member) => member.id === parseInt(memberId)
 );
 let member = factory.createMember(memberData);
-
 let memberMedias = medias.filter((media) => {
   return media.photographerId === parseInt(memberId);
 });
-member.medias = memberMedias;
-let mediaCounter = member.medias.length;
+let mediaCounter = memberMedias.length;
+console.log(member);
 
 // chargement des photographes
 function chargeMainDiv() {
-  let htmlMemberPage = member.getMemberTemplate();
+  let htmlMedias = "";
+  let photoPlaceInList = 0;
+  for (const media of memberMedias) {
+    photoPlaceInList += 1;
+    htmlMedias += media.getMediaTemplate(photoPlaceInList, member.name);
+    member.likes += media.likes;
+  }
+  let htmlMemberPage = member.getMemberTemplate(htmlMedias);
   let modalHtmlMember = member.getModalTemplate();
   document.getElementById("main-div").innerHTML = htmlMemberPage;
   document.getElementById("member-modal").innerHTML = modalHtmlMember;
@@ -257,7 +266,6 @@ function openLightbox() {
           ".lightbox-image-tag"
         ).innerHTML = ` <img src="${source}" class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="">`;
         let titleSelector = `.image-title--${photoPlaceInList}`;
-        console.log(titleSelector);
         document.querySelector(".lightbox-image-title").innerText =
           document.querySelector(titleSelector).textContent;
       });
@@ -273,7 +281,6 @@ function openLightbox() {
         <video/>
         `;
         let titleSelector = `.image-title--${photoPlaceInList}`;
-        console.log(titleSelector);
         document.querySelector(".lightbox-image-title").innerText =
           document.querySelector(titleSelector).textContent;
       });
@@ -289,7 +296,6 @@ function chargeLightBox() {
 
   // previous modal lightbox
   document.querySelector(".previous-lightbox").addEventListener("click", () => {
-    console.log("coucou");
     let photoPlaceInList = document
       .querySelector(".current-lightbox-image")
       .getAttribute("data-placeinlist");
@@ -321,7 +327,6 @@ function chargeLightBox() {
         `;
     }
     let titleSelector = `.image-title--${previousPlaceInList}`;
-    console.log(titleSelector);
     document.querySelector(".lightbox-image-title").innerText =
       document.querySelector(titleSelector).textContent;
   });
@@ -339,7 +344,6 @@ function chargeLightBox() {
         ? 1
         : parseInt(photoPlaceInList) + 1;
     let searchedAttribute = `[data-placeInList='${nextPlaceInList}']`;
-    console.log(searchedAttribute);
     let nextMediaElement = document.querySelector(searchedAttribute);
     // if next media is an image
     if (nextMediaElement.tagName === "IMG") {
@@ -363,7 +367,6 @@ function chargeLightBox() {
         `;
     }
     let titleSelector = `.image-title--${nextPlaceInList}`;
-    console.log(titleSelector);
     document.querySelector(".lightbox-image-title").innerText =
       document.querySelector(titleSelector).textContent;
   }
