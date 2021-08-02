@@ -21,7 +21,7 @@ export default class Member {
     return `
         <div class="member" id="${this.id}">
           <a href="./member.html?id=${this.id}" class="member-header">
-            <div class="member-image">
+            <div class="member-image" aria-label="${this.name}">
                 <img src="images/members-photos/${this.portrait}" alt="" class="member-logo" />
             </div>
             <h2 class="member-name">${this.name}</h2>
@@ -53,7 +53,7 @@ export default class Member {
     <section class="member-presentation">
           <div class="member-description">
             <h1>${this.name}</h1>
-            <button class="contact-me modal-btn">Contactez-moi</button>
+            <button role="button" class="contact-me modal-btn" aria-label="Contact Me">Contactez-moi</button>
             <h3 class="member-location">${this.city}, ${this.country}</h3>
             <h4 class="member-message">Voir le beau dans le quotidien</h4>
             <div class="member-tags">
@@ -74,14 +74,14 @@ export default class Member {
         </section>
         <section class="photo-list-section">
           <div class="list-ordering">
-            <span>Trier par</span
+            <span id="ordering-label">Trier par</span
             >
             <div class= "order-collapse" id="">
-              <div class="order-element order-element--active">Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
-              <div class= "order-oppened" id="">
+              <div role="button" aria-haspopup="listbox" aria-expanded class="order-element order-element--active" tabIndex='0'>Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
+              <div class= "order-oppened" role="listbox" aria-activedescendant aria-selected aria-labelledby="ordering-label">
                 <div class="order-element order-element--active" id="order-popularity">Popularité<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></div>
-                <div class="order-element order-element--inactive" id="order-date">Date</div>
-                <div class="order-element order-element--inactive" id="order-title">Titre</div>
+                <div class="order-element order-element--inactive" id="order-date" tabIndex='0'>Date</div>
+                <div class="order-element order-element--inactive" id="order-title" tabIndex='0'>Titre</div>
               </div>
             </div>
             
@@ -94,21 +94,22 @@ export default class Member {
   }
   getModalTemplate() {
     return `
-        <div class="content">
+        <div class="content" role="dialog" aria-label="Contact me ${this.name}" aria-labelledby="modal-heading">
           
           <div class="modal-body" id="modal-body">
-          <h1 class="modal-header">Contactez-moi</br>
-          ${this.name}
+          <div class="modal-header">
+          <h1 id="modal-heading">Contactez-moi</br>${this.name}</h1>
           <span class="close"></span>
-          </h1>
+          </div>
             <div id="form-confirmation">
               <p id="form-confirmation-message">
-                Merci ! Votre réservation a été reçue
+                Merci ! Votre message a été envoyé !
               </p>
               <button
                 class="btn-submit button"
                 id="confirmation-close"
                 value="Close"
+                aria-label="Close Contact form"
               >
                 Fermer
               </button>
@@ -120,33 +121,35 @@ export default class Member {
               id="modal-form"
             >
               <div class="formData">
-                <label for="first-name">Prénom</label><br />
+                <label for="first-name" id="first-name-label">Prénom</label><br />
                 <input
                   class="text-control"
                   type="text"
                   id="first-name"
                   name="first-name"
+                  aria-labelledby="first-name-label"
                 /><br />
                 <p id="first-name-validation" class="form-validation"></p>
               </div>
               <div class="formData">
-                <label for="last-name">Nom</label><br />
+                <label for="last-name" id="last-name-label">Nom</label><br />
                 <input
                   class="text-control"
                   type="text"
                   id="last-name"
                   name="last-name"
+                  aria-labelledby="first-name-label"
                 /><br />
                 <p id="last-name-validation" class="form-validation"></p>
               </div>
               <div class="formData">
-                <label for="email">E-mail</label><br />
-                <input class="text-control" id="email" name="email" /><br />
+                <label for="email" id="email-label">E-mail</label><br />
+                <input class="text-control" id="email" name="email aria-labelledby="first-name-label"" /><br />
                 <p id="email-validation" class="form-validation"></p>
               </div>
               <div class="formData">
-                <label for="message">Votre message</label><br />
-                <textarea class="text-control" form="modal-form" id="message" name="message" /></textarea><br />
+                <label for="message id="message-label"">Votre message</label><br />
+                <textarea class="text-control" form="modal-form" id="message" name="message" aria-labelledby="first-name-label" /></textarea><br />
                 <p id="message-validation" class="form-validation"></p>
               </div>
 
@@ -154,6 +157,7 @@ export default class Member {
                 class="btn-submit button"
                 type="submit"
                 value="Envoyer"
+                aria-label="send"
               />
             </form>
           </div>

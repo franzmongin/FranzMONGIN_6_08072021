@@ -29,7 +29,7 @@ export default class Media {
                 <div class="like-div">
                   <span class="like-counter like-counter-${this.id}">${
         this.likes
-      }</span><img src="./images/icons/heart.svg" alt="" class="like-photo-button like-photo-button-${
+      }</span><img src="./images/icons/heart.svg" alt="likes" class="like-photo-button like-photo-button-${
         this.id
       }" />
                 </div>
@@ -50,7 +50,7 @@ export default class Media {
                     src="./images/${memberName.split(" ").join("")}/${
         this.image
       }"
-                    alt=""
+                    alt="${this.title}"
                   />
                   
                 </div>
@@ -58,7 +58,7 @@ export default class Media {
                 <div class="like-div">
                   <span class="like-counter like-counter-${this.id}">${
         this.likes
-      }</span><img src="./images/icons/heart.svg" alt="" class="like-photo-button like-photo-button-${
+      }</span><img src="./images/icons/heart.svg" alt="likes" class="like-photo-button like-photo-button-${
         this.id
       }" />
                 </div>

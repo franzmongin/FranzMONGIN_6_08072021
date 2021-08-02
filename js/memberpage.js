@@ -5,6 +5,7 @@ import Factory from "./Factory";
 const factory = new Factory();
 let membersJson = data.photographers;
 let mediaJson = data.media;
+console.log(mediaJson);
 let medias = [];
 for (let i = 0; i < mediaJson.length; i++) {
   medias.push(factory.createMedia(mediaJson[i]));
@@ -260,28 +261,32 @@ function openLightbox() {
       let source = el.getAttribute("src");
       let photoPlaceInList = el.getAttribute("data-placeinlist");
       el.addEventListener("click", function () {
+        let titleSelector = `.image-title--${photoPlaceInList}`;
+        let titleContent = document.querySelector(titleSelector).textContent;
         document.querySelector(".lightbox-modal").style.display = "flex";
         document.querySelector(
           ".lightbox-image-tag"
-        ).innerHTML = ` <img src="${source}" class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="">`;
-        let titleSelector = `.image-title--${photoPlaceInList}`;
+        ).innerHTML = ` <img src="${source}" class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="${titleContent}">`;
+
         document.querySelector(".lightbox-image-title").innerText =
-          document.querySelector(titleSelector).textContent;
+          titleContent;
       });
     } else {
       let source = el.querySelector("source").getAttribute("src");
       let photoPlaceInList = el.getAttribute("data-placeinlist");
       el.addEventListener("click", function () {
+        let titleSelector = `.image-title--${photoPlaceInList}`;
+        let titleContent = document.querySelector(titleSelector).textContent;
         document.querySelector(".lightbox-modal").style.display = "flex";
         document.querySelector(
           ".lightbox-image-tag"
-        ).innerHTML = ` <video class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="">
+        ).innerHTML = ` <video class="current-lightbox-image" data-placeInList="${photoPlaceInList}">
         <source src="${source}"
         <video/>
         `;
-        let titleSelector = `.image-title--${photoPlaceInList}`;
+
         document.querySelector(".lightbox-image-title").innerText =
-          document.querySelector(titleSelector).textContent;
+          titleContent;
       });
     }
   });
