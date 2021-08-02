@@ -12,7 +12,6 @@ export default class Media {
   }
   getMediaTemplate(photoPlaceInList, memberName) {
     if (this.video) {
-      this.likes += this.likes;
       return `
         <div class="list-item list-item-${
           this.id
@@ -40,7 +39,6 @@ export default class Media {
 
       // pour les images simples
     } else {
-      this.likes += this.likes;
       return `
         <div class="list-item list-item-${
           this.id

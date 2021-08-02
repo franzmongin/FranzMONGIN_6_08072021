@@ -21,7 +21,6 @@ let memberMedias = medias.filter((media) => {
   return media.photographerId === parseInt(memberId);
 });
 let mediaCounter = memberMedias.length;
-console.log(member);
 
 // chargement des photographes
 function chargeMainDiv() {
@@ -176,7 +175,7 @@ function orderList() {
         let id = el.id;
         switch (id) {
           case "order-date":
-            member.medias.sort((a, b) => {
+            memberMedias.sort((a, b) => {
               return new Date(b.date) - new Date(a.date);
             });
 
@@ -185,13 +184,13 @@ function orderList() {
             orderList();
             break;
           case "order-popularity":
-            member.medias.sort((a, b) => (a.likes < b.likes ? 1 : -1));
+            memberMedias.sort((a, b) => (a.likes < b.likes ? 1 : -1));
             recharge();
             changeOrderlistAfter("popularity");
             orderList();
             break;
           case "order-title":
-            member.medias.sort((a, b) => (a.title > b.title ? 1 : -1));
+            memberMedias.sort((a, b) => (a.title > b.title ? 1 : -1));
             recharge();
             changeOrderlistAfter("title");
             orderList();
