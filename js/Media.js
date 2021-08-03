@@ -28,10 +28,10 @@ export default class Media {
                 <h6 class="image-title--${photoPlaceInList}">${this.title}</h6>
                 <div class="like-div">
                   <span class="like-counter like-counter-${this.id}">${
-        this.likes
-      }</span><img src="./images/icons/heart.svg" alt="likes" class="like-photo-button like-photo-button-${
-        this.id
-      }" />
+                    this.likes
+                  }</span><button class="heart-button"><img tabIndex='0' src="./images/icons/heart.svg" alt="likes" class="like-photo-button like-photo-button-${
+                    this.id
+                  }" /></button>
                 </div>
               </div>
             </div>
@@ -45,7 +45,7 @@ export default class Media {
         } list-item--${photoPlaceInList}">
               <div class="list-item-content">
                 <div class="item-image">
-                  <img
+                  <img tabIndex='0'
                     class="item-image-tag" data-placeInList="${photoPlaceInList}" tabIndex='0'
                     src="./images/${memberName.split(" ").join("")}/${
         this.image
@@ -58,9 +58,9 @@ export default class Media {
                 <div class="like-div">
                   <span class="like-counter like-counter-${this.id}">${
         this.likes
-      }</span><img src="./images/icons/heart.svg" alt="likes" class="like-photo-button like-photo-button-${
+      }</span><button class="heart-button"><img src="./images/icons/heart.svg" alt="likes" class="like-photo-button like-photo-button-${
         this.id
-      }" />
+      }" /></button>
                 </div>
               </div>
             </div>

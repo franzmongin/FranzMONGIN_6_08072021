@@ -218,12 +218,20 @@
               width:70%;
             }
             .like-div {
+              background: transparent;
+              border: none;
               display: flex;
               align-items: center;
               .like-counter {
                 color: $primary-color;
                 font-size: 1.5em;
                 padding-right: 5px;
+              }
+              .heart-button{
+                background: transparent;
+                padding:0;
+                margin:0;
+                border:none;
               }
             }
           }

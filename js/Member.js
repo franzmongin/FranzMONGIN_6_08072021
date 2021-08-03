@@ -138,7 +138,7 @@ export default class Member {
                   type="text"
                   id="last-name"
                   name="last-name"
-                  aria-labelledby="first-name-label"
+                  aria-labelledby="last-name-label"
                 /><br />
                 <p id="last-name-validation" class="form-validation"></p>
               </div>
@@ -149,7 +149,7 @@ export default class Member {
               </div>
               <div class="formData">
                 <label for="message id="message-label"">Votre message</label><br />
-                <textarea class="text-control" form="modal-form" id="message" name="message" aria-labelledby="first-name-label" /></textarea><br />
+                <textarea class="text-control" form="modal-form" id="message" name="message" aria-labelledby="message-label" /></textarea><br />
                 <p id="message-validation" class="form-validation"></p>
               </div>
 
