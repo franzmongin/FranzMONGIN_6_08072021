@@ -18,7 +18,7 @@ export default class Media {
         } list-item--${photoPlaceInList}">
               <div class="list-item-content">
                 <div class="item-image">
-                  <video class="item-image-tag" data-placeInList="${photoPlaceInList}">
+                  <video class="item-image-tag" data-placeInList="${photoPlaceInList}"  tabIndex='0'>
   <source src="./images/${memberName.split(" ").join("")}/${
         this.video
       }" type="video/mp4">
@@ -46,7 +46,7 @@ export default class Media {
               <div class="list-item-content">
                 <div class="item-image">
                   <img
-                    class="item-image-tag" data-placeInList="${photoPlaceInList}"
+                    class="item-image-tag" data-placeInList="${photoPlaceInList}" tabIndex='0'
                     src="./images/${memberName.split(" ").join("")}/${
         this.image
       }"

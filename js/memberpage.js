@@ -5,7 +5,6 @@ import Factory from "./Factory";
 const factory = new Factory();
 let membersJson = data.photographers;
 let mediaJson = data.media;
-console.log(mediaJson);
 let medias = [];
 for (let i = 0; i < mediaJson.length; i++) {
   medias.push(factory.createMedia(mediaJson[i]));
@@ -109,6 +108,14 @@ function chargeModal() {
   document
     .getElementById("confirmation-close")
     .addEventListener("click", closeModal);
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+      closeModal();
+      // close lightbox too if oppened
+      document.querySelector(".lightbox-modal").style.display = "none";
+    }
+  })
+  
 
   // launch modal form
   function launchModal() {
@@ -125,6 +132,7 @@ function chargeModal() {
       element.innerText = "";
     });
   }
+  
 }
 
 //fixed likesandprices
@@ -207,26 +215,26 @@ function orderList() {
     switch (choice) {
       case "date":
         templateOrderChoices = `
-            <span class="ordering-title">Trier par</span>
+            <span id="ordering-label">Trier par</span>
             <div class= "order-collapse" id="">
-              <div class="order-element order-element--active">Date<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
-              <div class= "order-oppened" id="">
-                <div class="order-element order-element--active" id="order-date">Date<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></div>
-                <div class="order-element order-element--inactive" id="order-popularity">Popularité</div>
-                <div class="order-element order-element--inactive" id="order-title">Titre</div>
+              <button class="order-element order-element--active">Date<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></button>
+              <div class= "order-oppened" role="listbox" aria-activedescendant aria-selected aria-labelledby="ordering-label">
+                <button class="order-element order-element--active" id="order-date">Date<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></button>
+                <button class="order-element order-element--inactive" id="order-popularity">Popularité</button>
+                <button class="order-element order-element--inactive" id="order-title">Titre</button>
               </div>
             </div>
         `;
         break;
       case "title":
         templateOrderChoices = `
-            <span class="ordering-title">Trier par</span>
+            <span class="ordering-label">Trier par</span>
             <div class= "order-collapse" id="">
-              <div class="order-element order-element--active">Titre<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
-              <div class= "order-oppened" id="">
-                <div class="order-element order-element--active" id="order-title">Titre<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></div>
-                <div class="order-element order-element--inactive" id="order-popularity">Popularité</div>
-                <div class="order-element order-element--inactive" id="order-date">Date</div>
+              <button class="order-element order-element--active">Titre<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></button>
+              <div class= "order-oppened" role="listbox" aria-activedescendant aria-selected aria-labelledby="ordering-label">
+                <button class="order-element order-element--active" id="order-title">Titre<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></button>
+                <button class="order-element order-element--inactive" id="order-popularity">Popularité</button>
+                <button class="order-element order-element--inactive" id="order-date">Date</button>
               </div>
             </div>
         `;
@@ -235,11 +243,11 @@ function orderList() {
         templateOrderChoices = `
             <span class="ordering-title">Trier par</span>
             <div class= "order-collapse" id="">
-              <div class="order-element order-element--active">Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
-              <div class= "order-oppened" id="">
-                <div class="order-element order-element--active" id="order-popularité">Popularité<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></div>
-                <div class="order-element order-element--inactive" id="order-title">Titre</div>
-                <div class="order-element order-element--inactive" id="order-date">Date</div>
+              <button class="order-element order-element--active">Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></button>
+              <div class= "order-oppened" role="listbox" aria-activedescendant aria-selected aria-labelledby="ordering-label">
+                <button class="order-element order-element--active" id="order-popularité">Popularité<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></button>
+                <button class="order-element order-element--inactive" id="order-title">Titre</button>
+                <button class="order-element order-element--inactive" id="order-date">Date</button>
               </div>
             </div>
         `;
@@ -266,11 +274,27 @@ function openLightbox() {
         document.querySelector(".lightbox-modal").style.display = "flex";
         document.querySelector(
           ".lightbox-image-tag"
-        ).innerHTML = ` <img src="${source}" class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="${titleContent}">`;
+        ).innerHTML = ` <img  tabindex="0" src="${source}" class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="${titleContent}">`;
 
         document.querySelector(".lightbox-image-title").innerText =
           titleContent;
+          document.querySelector('.current-lightbox-image').focus();
       });
+      el.addEventListener("keydown", function (e) {
+        if(e.which === 13){
+          let titleSelector = `.image-title--${photoPlaceInList}`;
+          let titleContent = document.querySelector(titleSelector).textContent;
+          document.querySelector(".lightbox-modal").style.display = "flex";
+          document.querySelector(
+            ".lightbox-image-tag"
+          ).innerHTML = ` <img  tabindex="0" src="${source}" class="current-lightbox-image" data-placeInList="${photoPlaceInList}" alt="${titleContent}">`;
+
+          document.querySelector(".lightbox-image-title").innerText =
+            titleContent;
+          document.querySelector('.current-lightbox-image').focus();  
+        }
+      });
+      ;
     } else {
       let source = el.querySelector("source").getAttribute("src");
       let photoPlaceInList = el.getAttribute("data-placeinlist");
@@ -280,14 +304,33 @@ function openLightbox() {
         document.querySelector(".lightbox-modal").style.display = "flex";
         document.querySelector(
           ".lightbox-image-tag"
-        ).innerHTML = ` <video class="current-lightbox-image" data-placeInList="${photoPlaceInList}">
+        ).innerHTML = ` <video  tabindex="0" controls class="current-lightbox-image" data-placeInList="${photoPlaceInList}">
         <source src="${source}"
         <video/>
         `;
 
         document.querySelector(".lightbox-image-title").innerText =
           titleContent;
+          document.querySelector('.current-lightbox-image').focus();
       });
+      el.addEventListener("keydown", function (e) {
+        if(e.which === 13){
+          let titleSelector = `.image-title--${photoPlaceInList}`;
+        let titleContent = document.querySelector(titleSelector).textContent;
+        document.querySelector(".lightbox-modal").style.display = "flex";
+        document.querySelector(
+          ".lightbox-image-tag"
+        ).innerHTML = ` <video  tabindex="0" controls class="current-lightbox-image" data-placeInList="${photoPlaceInList}">
+        <source src="${source}"
+        <video/>
+        `;
+
+        document.querySelector(".lightbox-image-title").innerText =
+          titleContent;
+        document.querySelector('.current-lightbox-image').focus();
+        }
+      });
+      
     }
   });
 }
@@ -308,6 +351,7 @@ function chargeLightBox() {
         ? mediaCounter
         : parseInt(photoPlaceInList) - 1;
     let searchedAttribute = `[data-placeInList='${previousPlaceInList}']`;
+    let previousItem = memberMedias[previousPlaceInList-1];
     let previousMediaElement = document.querySelector(searchedAttribute);
     // if previous media is an image
     if (previousMediaElement.tagName === "IMG") {
@@ -316,7 +360,7 @@ function chargeLightBox() {
         .getAttribute("src");
       document.querySelector(
         ".lightbox-image-tag"
-      ).innerHTML = ` <img src="${previousMediaSource}" class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="">`;
+      ).innerHTML = ` <img tabindex="0" src="${previousMediaSource}" class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="${previousItem.title}">`;
     } else {
       // if previous media is a video
       let previousMediaSource = document
@@ -325,7 +369,7 @@ function chargeLightBox() {
         .getAttribute("src");
       document.querySelector(
         ".lightbox-image-tag"
-      ).innerHTML = ` <video class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="">
+      ).innerHTML = ` <video tabindex="0" class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="${previousItem.title}">
         <source src="${previousMediaSource}"
         <video/>
         `;
@@ -333,13 +377,17 @@ function chargeLightBox() {
     let titleSelector = `.image-title--${previousPlaceInList}`;
     document.querySelector(".lightbox-image-title").innerText =
       document.querySelector(titleSelector).textContent;
+      document.querySelector('.current-lightbox-image').focus();
   });
+  //previous modal lightbox keyboard
+  
 
   // next modal lightbox
   document
     .querySelector(".next-lightbox")
     .addEventListener("click", nextLightBoxHandler);
   function nextLightBoxHandler() {
+    
     let photoPlaceInList = document
       .querySelector(".current-lightbox-image")
       .getAttribute("data-placeinlist");
@@ -347,6 +395,8 @@ function chargeLightBox() {
       parseInt(photoPlaceInList) + 1 > mediaCounter
         ? 1
         : parseInt(photoPlaceInList) + 1;
+    let nextItem = memberMedias[nextPlaceInList-1];
+    console.log(nextItem);
     let searchedAttribute = `[data-placeInList='${nextPlaceInList}']`;
     let nextMediaElement = document.querySelector(searchedAttribute);
     // if next media is an image
@@ -356,7 +406,7 @@ function chargeLightBox() {
         .getAttribute("src");
       document.querySelector(
         ".lightbox-image-tag"
-      ).innerHTML = ` <img src="${nextMediaSource}" class="current-lightbox-image" data-placeInList="${nextPlaceInList}" alt="">`;
+      ).innerHTML = ` <img tabindex="0" src="${nextMediaSource}" class="current-lightbox-image" data-placeInList="${nextPlaceInList}" alt="${nextItem.title}">`;
     } else {
       // if next media is a video
       let nextMediaSource = document
@@ -365,7 +415,7 @@ function chargeLightBox() {
         .getAttribute("src");
       document.querySelector(
         ".lightbox-image-tag"
-      ).innerHTML = ` <video class="current-lightbox-image" data-placeInList="${nextPlaceInList}" alt="">
+      ).innerHTML = ` <video tabindex="0" class="current-lightbox-image" data-placeInList="${nextPlaceInList}" alt="${nextItem.title}">
         <source src="${nextMediaSource}"
         <video/>
         `;
@@ -373,12 +423,14 @@ function chargeLightBox() {
     let titleSelector = `.image-title--${nextPlaceInList}`;
     document.querySelector(".lightbox-image-title").innerText =
       document.querySelector(titleSelector).textContent;
+      document.querySelector('.current-lightbox-image').focus();
   }
   openLightbox();
 }
 
 // once document is loaded do this
 document.addEventListener("DOMContentLoaded", function (event) {
+  
   chargeMainDiv();
   chargesLikesAndPriceDiv();
   addLikeCounterEvent();
@@ -386,6 +438,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
   chargeModal();
   checkFields();
   chargeLightBox();
+  console.log(memberMedias)
+  
 });
 function recharge() {
   chargeMainDiv();
@@ -394,3 +448,4 @@ function recharge() {
   checkFields();
   openLightbox();
 }
+

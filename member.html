@@ -24,24 +24,32 @@
       <div class="lightbox-modal" role="dialog" aria-label="image closeup view">
         <div class="lightbox-content">
           <div class="lightbox-image-tag"></div>
-          <img
-            class="cross-icon close-lightbox"
-            src="./images/icons/cross.svg"
-            alt="Close dialog"
+          <button
+          class="cross-icon close-lightbox lightbox-button"
             role="button"
-          />
+            tabindex="0"
+            
+          >
+        <img 
+        src="./images/icons/cross.svg"
+        alt="Close dialog" alt=""></button>
+        <button role="link" tabindex="0" class="left-icon previous-lightbox lightbox-button">
           <img
-            class="left-icon previous-lightbox"
-            src="./images/icons/chevron-left.svg"
-            alt="Previous image"
-            role="link"
-          />
-          <img
-            class="right-icon next-lightbox"
+          src="./images/icons/chevron-left.svg"
+          alt="Previous image"
+        />
+        </button>
+          <button role="link"
+          tabindex="0" class="right-icon next-lightbox lightbox-button">
+            <img
+            
             src="./images/icons/chevron-right.svg"
             alt="Next image"
-            role="link"
+            
           />
+          </button>
+          
+          <!-- <input type="text"> -->
           <div class="lightbox-image-title"></div>
         </div>
       </div>

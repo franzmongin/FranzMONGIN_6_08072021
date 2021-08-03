@@ -77,11 +77,11 @@ export default class Member {
             <span id="ordering-label">Trier par</span
             >
             <div class= "order-collapse" id="">
-              <div role="button" aria-haspopup="listbox" aria-expanded class="order-element order-element--active" tabIndex='0'>Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></div>
+              <button role="button" aria-haspopup="listbox" aria-expanded class="order-element order-element--active">Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></button>
               <div class= "order-oppened" role="listbox" aria-activedescendant aria-selected aria-labelledby="ordering-label">
-                <div class="order-element order-element--active" id="order-popularity">Popularité<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></div>
-                <div class="order-element order-element--inactive" id="order-date" tabIndex='0'>Date</div>
-                <div class="order-element order-element--inactive" id="order-title" tabIndex='0'>Titre</div>
+                <button role="button" class="order-element order-element--active" id="order-popularity">Popularité<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></button>
+                <button role="button" class="order-element order-element--inactive" id="order-date" tabIndex='0'>Date</button>
+                <button role="button" class="order-element order-element--inactive" id="order-title">Titre</button>
               </div>
             </div>
             
