@@ -333,6 +333,7 @@ function openLightbox() {
       
     }
   });
+  
 }
 // LIGHTBOX
 function chargeLightBox() {
@@ -342,43 +343,52 @@ function chargeLightBox() {
   });
 
   // previous modal lightbox
-  document.querySelector(".previous-lightbox").addEventListener("click", () => {
+  function previousLightboxHandler (){
     let photoPlaceInList = document
-      .querySelector(".current-lightbox-image")
-      .getAttribute("data-placeinlist");
-    let previousPlaceInList =
-      parseInt(photoPlaceInList) - 1 < 1
-        ? mediaCounter
-        : parseInt(photoPlaceInList) - 1;
-    let searchedAttribute = `[data-placeInList='${previousPlaceInList}']`;
-    let previousItem = memberMedias[previousPlaceInList-1];
-    let previousMediaElement = document.querySelector(searchedAttribute);
-    // if previous media is an image
-    if (previousMediaElement.tagName === "IMG") {
-      let previousMediaSource = document
-        .querySelector(searchedAttribute)
-        .getAttribute("src");
-      document.querySelector(
-        ".lightbox-image-tag"
-      ).innerHTML = ` <img tabindex="0" src="${previousMediaSource}" class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="${previousItem.title}">`;
-    } else {
-      // if previous media is a video
-      let previousMediaSource = document
-        .querySelector(searchedAttribute)
-        .querySelector("source")
-        .getAttribute("src");
-      document.querySelector(
-        ".lightbox-image-tag"
-      ).innerHTML = ` <video tabindex="0" class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="${previousItem.title}">
-        <source src="${previousMediaSource}"
-        <video/>
-        `;
+    .querySelector(".current-lightbox-image")
+    .getAttribute("data-placeinlist");
+  let previousPlaceInList =
+    parseInt(photoPlaceInList) - 1 < 1
+      ? mediaCounter
+      : parseInt(photoPlaceInList) - 1;
+  let searchedAttribute = `[data-placeInList='${previousPlaceInList}']`;
+  let previousItem = memberMedias[previousPlaceInList-1];
+  let previousMediaElement = document.querySelector(searchedAttribute);
+  // if previous media is an image
+  if (previousMediaElement.tagName === "IMG") {
+    let previousMediaSource = document
+      .querySelector(searchedAttribute)
+      .getAttribute("src");
+    document.querySelector(
+      ".lightbox-image-tag"
+    ).innerHTML = ` <img tabindex="0" src="${previousMediaSource}" class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="${previousItem.title}">`;
+  } else {
+    // if previous media is a video
+    let previousMediaSource = document
+      .querySelector(searchedAttribute)
+      .querySelector("source")
+      .getAttribute("src");
+    document.querySelector(
+      ".lightbox-image-tag"
+    ).innerHTML = ` <video tabindex="0" class="current-lightbox-image" data-placeInList="${previousPlaceInList}" alt="${previousItem.title}">
+      <source src="${previousMediaSource}"
+      <video/>
+      `;
+  }
+  let titleSelector = `.image-title--${previousPlaceInList}`;
+  document.querySelector(".lightbox-image-title").innerText =
+    document.querySelector(titleSelector).textContent;
+    document.querySelector('.current-lightbox-image').focus();
+  }
+  document.querySelector(".previous-lightbox").addEventListener("click", previousLightboxHandler);
+  document.addEventListener('keydown', (e)=>{
+    if(document.querySelector('.lightbox-modal').style.display === 'flex'){
+      if(e.key === 'ArrowLeft' ){
+        previousLightboxHandler();
+      }
     }
-    let titleSelector = `.image-title--${previousPlaceInList}`;
-    document.querySelector(".lightbox-image-title").innerText =
-      document.querySelector(titleSelector).textContent;
-      document.querySelector('.current-lightbox-image').focus();
-  });
+  })
+  
   //previous modal lightbox keyboard
   
 
@@ -386,6 +396,13 @@ function chargeLightBox() {
   document
     .querySelector(".next-lightbox")
     .addEventListener("click", nextLightBoxHandler);
+    document.addEventListener('keydown', (e)=>{
+    if(document.querySelector('.lightbox-modal').style.display === 'flex'){
+      if(e.key === 'ArrowRight' ){
+        nextLightBoxHandler()
+      }
+    }
+  });
   function nextLightBoxHandler() {
     
     let photoPlaceInList = document
@@ -396,7 +413,6 @@ function chargeLightBox() {
         ? 1
         : parseInt(photoPlaceInList) + 1;
     let nextItem = memberMedias[nextPlaceInList-1];
-    console.log(nextItem);
     let searchedAttribute = `[data-placeInList='${nextPlaceInList}']`;
     let nextMediaElement = document.querySelector(searchedAttribute);
     // if next media is an image
@@ -426,6 +442,7 @@ function chargeLightBox() {
       document.querySelector('.current-lightbox-image').focus();
   }
   openLightbox();
+  
 }
 
 // once document is loaded do this
@@ -438,7 +455,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   chargeModal();
   checkFields();
   chargeLightBox();
-  console.log(memberMedias)
   
 });
 function recharge() {
