@@ -1,125 +1,124 @@
-import "../sass/main.scss";
-import * as data from "../data/photographers.json";
-import Factory from "./Factory";
+import '../sass/main.scss'
+import * as data from '../data/photographers.json'
+import Factory from './Factory'
 
-const factory = new Factory();
-let membersJson = data.photographers;
-let members = [];
+const factory = new Factory()
+let membersJson = data.photographers
+let members = []
 
 // chargement des photographes
-function chargeMembers() {
-  members = [];
+function chargeMembers () {
+  members = []
 
   for (let i = 0; i < membersJson.length; i++) {
-    members.push(factory.createMember(membersJson[i]));
+    members.push(factory.createMember(membersJson[i]))
   }
-  let htmlMembers = "";
+  let htmlMembers = ''
   for (const member of members) {
-    htmlMembers += member.getTemplate();
+    htmlMembers += member.getTemplate()
   }
-  document.getElementById("photographer-list").innerHTML = htmlMembers;
+  document.getElementById('photographer-list').innerHTML = htmlMembers
 }
 
-function addEventListenerToDifferentTagLink() {
-  const items = document.getElementsByClassName("tag-link");
+function addEventListenerToDifferentTagLink () {
+  const items = document.getElementsByClassName('tag-link')
   for (const item of items) {
-    if (item.classList.contains("tag-portrait")) {
-      item.addEventListener("click", (e) => orderMembers(e, "portrait"));
-    } else if (item.classList.contains("tag-fashion")) {
-      item.addEventListener("click", (e) => orderMembers(e, "fashion"));
-    } else if (item.classList.contains("tag-art")) {
-      item.addEventListener("click", (e) => orderMembers(e, "art"));
-    } else if (item.classList.contains("tag-architecture")) {
-      item.addEventListener("click", (e) => orderMembers(e, "architecture"));
-    } else if (item.classList.contains("tag-travel")) {
-      item.addEventListener("click", (e) => orderMembers(e, "travel"));
-    } else if (item.classList.contains("tag-sports")) {
-      item.addEventListener("click", (e) => orderMembers(e, "sports"));
-    } else if (item.classList.contains("tag-animals")) {
-      item.addEventListener("click", (e) => orderMembers(e, "animals"));
-    } else if (item.classList.contains("tag-events")) {
-      item.addEventListener("click", (e) => orderMembers(e, "events"));
+    if (item.classList.contains('tag-portrait')) {
+      item.addEventListener('click', (e) => orderMembers(e, 'portrait'))
+    } else if (item.classList.contains('tag-fashion')) {
+      item.addEventListener('click', (e) => orderMembers(e, 'fashion'))
+    } else if (item.classList.contains('tag-art')) {
+      item.addEventListener('click', (e) => orderMembers(e, 'art'))
+    } else if (item.classList.contains('tag-architecture')) {
+      item.addEventListener('click', (e) => orderMembers(e, 'architecture'))
+    } else if (item.classList.contains('tag-travel')) {
+      item.addEventListener('click', (e) => orderMembers(e, 'travel'))
+    } else if (item.classList.contains('tag-sports')) {
+      item.addEventListener('click', (e) => orderMembers(e, 'sports'))
+    } else if (item.classList.contains('tag-animals')) {
+      item.addEventListener('click', (e) => orderMembers(e, 'animals'))
+    } else if (item.classList.contains('tag-events')) {
+      item.addEventListener('click', (e) => orderMembers(e, 'events'))
     }
   }
 }
-function orderMembers(e, tag) {
-  e.stopPropagation();
-  e.preventDefault();
+function orderMembers (e, tag) {
+  e.stopPropagation()
+  e.preventDefault()
   switch (tag) {
-    case "portrait":
+    case 'portrait':
       membersJson = data.photographers.filter(function (item) {
-        return item.tags.includes("portrait");
-      });
+        return item.tags.includes('portrait')
+      })
 
-      break;
-    case "fashion":
+      break
+    case 'fashion':
       membersJson = data.photographers.filter(function (item) {
-        return item.tags.includes("fashion");
-      });
+        return item.tags.includes('fashion')
+      })
 
-      break;
-    case "art":
+      break
+    case 'art':
       membersJson = data.photographers.filter(function (item) {
-        return item.tags.includes("art");
-      });
+        return item.tags.includes('art')
+      })
 
-      break;
-    case "architecture":
+      break
+    case 'architecture':
       membersJson = data.photographers.filter(function (item) {
-        return item.tags.includes("architecture");
-      });
+        return item.tags.includes('architecture')
+      })
 
-      break;
-    case "travel":
+      break
+    case 'travel':
       membersJson = data.photographers.filter(function (item) {
-        return item.tags.includes("travel");
-      });
+        return item.tags.includes('travel')
+      })
 
-      break;
-    case "sports":
+      break
+    case 'sports':
       membersJson = data.photographers.filter(function (item) {
-        return item.tags.includes("sports");
-      });
+        return item.tags.includes('sports')
+      })
 
-      break;
-    case "animals":
+      break
+    case 'animals':
       membersJson = data.photographers.filter(function (item) {
-        return item.tags.includes("animals");
-      });
+        return item.tags.includes('animals')
+      })
 
-      break;
-    case "events":
+      break
+    case 'events':
       membersJson = data.photographers.filter(function (item) {
-        return item.tags.includes("events");
-      });
+        return item.tags.includes('events')
+      })
 
-      break;
+      break
     default:
-      break;
+      break
   }
-  chargeMembers();
-  addEventListenerToDifferentTagLink();
+  chargeMembers()
+  addEventListenerToDifferentTagLink()
 }
-let mainY = document.querySelector(".main").offsetTop;
+const mainY = document.querySelector('.main').offsetTop
 
 // gestion du bouton apparaissant quand le scroll dépasse la balise main
-document.addEventListener("DOMContentLoaded", function (event) {
-  
-  chargeMembers();
-  addEventListenerToDifferentTagLink();
-  window.addEventListener("scroll", function (e) {
+document.addEventListener('DOMContentLoaded', function () {
+  chargeMembers()
+  addEventListenerToDifferentTagLink()
+  window.addEventListener('scroll', function () {
     if (window.scrollY > mainY) {
-      document.querySelector(".back-to-main-div").style.display = "flex";
+      document.querySelector('.back-to-main-div').style.display = 'flex'
     } else {
-      document.querySelector(".back-to-main-div").style.display = "none";
+      document.querySelector('.back-to-main-div').style.display = 'none'
     }
-  });
-   
-  var url_string = window.location.href;
-  var url = new URL(url_string);
-  var routeTag = url.searchParams.get("tag");
-  if(routeTag){
-    let tagName = ".tag-"+routeTag;
-    document.querySelector(tagName).click();
+  })
+
+  const url_string = window.location.href
+  const url = new URL(url_string)
+  const routeTag = url.searchParams.get('tag')
+  if (routeTag) {
+    const tagName = '.tag-' + routeTag
+    document.querySelector(tagName).click()
   }
-});
+})

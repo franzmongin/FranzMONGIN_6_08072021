@@ -1,16 +1,17 @@
 export default class Media {
-  constructor(data) {
-    this.id = data.id;
-    this.date = data.date;
-    this.image = data.image;
-    this.video = data.video;
-    this.likes = data.likes;
-    this.photographerId = data.photographerId;
-    this.price = data.price;
-    this.tags = data.tags;
-    this.title = data.title;
+  constructor (data) {
+    this.id = data.id
+    this.date = data.date
+    this.image = data.image
+    this.video = data.video
+    this.likes = data.likes
+    this.photographerId = data.photographerId
+    this.price = data.price
+    this.tags = data.tags
+    this.title = data.title
   }
-  getMediaTemplate(photoPlaceInList, memberName) {
+
+  getMediaTemplate (photoPlaceInList, memberName) {
     if (this.video) {
       return `
         <div class="list-item list-item-${
@@ -19,7 +20,7 @@ export default class Media {
               <div class="list-item-content">
                 <div class="item-image">
                   <video class="item-image-tag" data-placeInList="${photoPlaceInList}"  tabIndex='0'>
-  <source src="./images/${memberName.split(" ").join("")}/${
+  <source src="./images/${memberName.split(' ').join('')}/${
         this.video
       }" type="video/mp4">
   Your browser does not support the video tag.
@@ -35,7 +36,7 @@ export default class Media {
                 </div>
               </div>
             </div>
-      `;
+      `
 
       // pour les images simples
     } else {
@@ -47,7 +48,7 @@ export default class Media {
                 <div class="item-image">
                   <img tabIndex='0'
                     class="item-image-tag" data-placeInList="${photoPlaceInList}" tabIndex='0'
-                    src="./images/${memberName.split(" ").join("")}/${
+                    src="./images/${memberName.split(' ').join('')}/${
         this.image
       }"
                     alt="${this.title}"
@@ -64,7 +65,7 @@ export default class Media {
                 </div>
               </div>
             </div>
-      `;
+      `
     }
   }
 }

@@ -1,22 +1,23 @@
 export default class Member {
-  constructor(data) {
-    this.id = data.id;
-    this.name = data.name;
-    this.city = data.city;
-    this.country = data.country;
-    this.tagline = data.tagline;
-    this.price = data.price;
-    this.tags = data.tags;
-    this.portrait = data.portrait;
-    this.medias;
-    this.likes = 0;
+  constructor (data) {
+    this.id = data.id
+    this.name = data.name
+    this.city = data.city
+    this.country = data.country
+    this.tagline = data.tagline
+    this.price = data.price
+    this.tags = data.tags
+    this.portrait = data.portrait
+    this.medias
+    this.likes = 0
   }
-  getTemplate() {
-    let memberTagHtml = "";
+
+  getTemplate () {
+    let memberTagHtml = ''
     for (const tag of this.tags) {
       memberTagHtml += `
     <li class="tag-link tag-${tag}"><a href=""><span class="sr-only">${tag}</span>#${tag}</a></li>
-    `;
+    `
     }
     return `
         <div class="member" id="${this.id}">
@@ -37,16 +38,17 @@ export default class Member {
             </ul>
           </div>
         </div>
-  `;
+  `
   }
-  getMemberTemplate(htmlMedias) {
-    let memberTagHtml = "";
+
+  getMemberTemplate (htmlMedias) {
+    let memberTagHtml = ''
     for (const tag of this.tags) {
       memberTagHtml += `
     <li class="tag-link tag-${tag.name}">
       <a href="../index.html?tag=${tag}"><span class="sr-only">${tag}</span>#${tag}</a>
     </li>
-    `;
+    `
     }
 
     return `
@@ -90,9 +92,10 @@ export default class Member {
             ${htmlMedias}
           </div>
         </section>
-    `;
+    `
   }
-  getModalTemplate() {
+
+  getModalTemplate () {
     return `
         <div class="content" role="dialog" aria-label="Contact me ${this.name}" aria-labelledby="modal-heading">
           
@@ -162,6 +165,6 @@ export default class Member {
             </form>
           </div>
       </div>
-    `;
+    `
   }
 }
