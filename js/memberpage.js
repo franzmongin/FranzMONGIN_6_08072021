@@ -73,6 +73,7 @@ function checkFields () {
   function onSubmit (e) {
     formValid = true
     e.preventDefault()
+    console.log(document.getElementById('first-name').value, document.getElementById('last-name').value, document.getElementById('email').value, document.getElementById('message').value )
     fieldValidation('first-name')
     fieldValidation('last-name')
     fieldValidation('email')

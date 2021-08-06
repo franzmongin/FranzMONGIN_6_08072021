@@ -22,23 +22,58 @@ function chargeMembers () {
 
 function addEventListenerToDifferentTagLink () {
   const items = document.getElementsByClassName('tag-link')
+  function fireTagInUse(tag){
+    document.querySelectorAll('.tag-link').forEach(element => {
+      element.classList.remove('tag-in-use')
+    });
+    document.querySelectorAll(`.tag-${tag}`).forEach(element => {
+      console.log(element)
+      element.classList.add('tag-in-use')
+    });
+  }
   for (const item of items) {
     if (item.classList.contains('tag-portrait')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'portrait'))
+      item.addEventListener('click', (e) =>{
+        
+        orderMembers(e, 'portrait')
+        fireTagInUse('portrait');
+        
+      })
     } else if (item.classList.contains('tag-fashion')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'fashion'))
+      item.addEventListener('click', (e) =>{
+        orderMembers(e, 'fashion')
+        fireTagInUse('fashion')
+      })
     } else if (item.classList.contains('tag-art')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'art'))
+      item.addEventListener('click', (e) =>{
+        orderMembers(e, 'art')
+        fireTagInUse('art')
+      })
     } else if (item.classList.contains('tag-architecture')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'architecture'))
+      item.addEventListener('click', (e) =>{
+        orderMembers(e, 'architecture')
+        fireTagInUse('architecture')
+      })
     } else if (item.classList.contains('tag-travel')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'travel'))
+      item.addEventListener('click', (e) =>{
+        orderMembers(e, 'travel')
+        fireTagInUse('travel')
+      })
     } else if (item.classList.contains('tag-sports')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'sports'))
+      item.addEventListener('click', (e) =>{
+        orderMembers(e, 'sports')
+        fireTagInUse('sports')
+      })
     } else if (item.classList.contains('tag-animals')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'animals'))
+      item.addEventListener('click', (e) =>{
+        orderMembers(e, 'animals')
+        fireTagInUse('animals')
+      })
     } else if (item.classList.contains('tag-events')) {
-      item.addEventListener('click', (e) => orderMembers(e, 'events'))
+      item.addEventListener('click', (e) =>{
+        orderMembers(e, 'events')
+        fireTagInUse('events')
+      })
     }
   }
 }
@@ -119,6 +154,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const routeTag = url.searchParams.get('tag')
   if (routeTag) {
     const tagName = '.tag-' + routeTag
-    document.querySelector(tagName).click()
+    document.querySelector(tagName).click();
+    document.querySelector(tagName).classList.add('tag-in-use');
+
   }
 })

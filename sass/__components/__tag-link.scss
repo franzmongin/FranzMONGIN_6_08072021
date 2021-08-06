@@ -10,4 +10,11 @@
     text-decoration: none;
     color: $primary-color;
   }
+  &.tag-in-use{
+    background: $primary-color;
+    a{
+      color:white;
+    }
+    
+  }
 }
