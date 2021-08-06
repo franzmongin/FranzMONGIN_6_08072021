@@ -1,13 +1,18 @@
 import Member from './Member'
-import Media from './Media'
+import Image from './Image'
+import Video from './Video'
 export default class Factory {
   createMember (data) {
     const member = new Member(data)
     return member
   }
 
-  createMedia (data) {
-    const media = new Media(data)
-    return media
+  createImage(data){
+    const image = new Image(data)
+    return image
+  }
+  createVideo(data){
+    const video = new Video(data)
+    return video
   }
 }

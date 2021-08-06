@@ -27,7 +27,6 @@ function addEventListenerToDifferentTagLink () {
       element.classList.remove('tag-in-use')
     });
     document.querySelectorAll(`.tag-${tag}`).forEach(element => {
-      console.log(element)
       element.classList.add('tag-in-use')
     });
   }

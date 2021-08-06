@@ -7,7 +7,12 @@ const membersJson = data.photographers
 const mediaJson = data.media
 const medias = []
 for (let i = 0; i < mediaJson.length; i++) {
-  medias.push(factory.createMedia(mediaJson[i]))
+  if(mediaJson[i].image){
+    medias.push(factory.createImage(mediaJson[i]))
+  }else if(mediaJson[i].video){
+    medias.push(factory.createVideo(mediaJson[i]))
+  }
+  
 }
 const url_string = window.location.href
 const url = new URL(url_string)
