@@ -1,6 +1,6 @@
 export default class Video{
     constructor(data){
-        this.id = data.id
+    this.id = data.id
     this.date = data.date
     this.video = data.video
     this.likes = data.likes
