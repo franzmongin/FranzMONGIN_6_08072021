@@ -29,6 +29,14 @@ const mediaCounter = memberMedias.length
 
 // chargement des photographes
 function chargeMainDiv () {
+  
+  const htmlMemberPage = member.getMemberTemplate()
+  const modalHtmlMember = member.getModalTemplate()
+  document.getElementById('main-div').innerHTML = htmlMemberPage
+  document.getElementById('member-modal').innerHTML = modalHtmlMember;
+  chargeMediaList();
+}
+function chargeMediaList(){
   let htmlMedias = ''
   let photoPlaceInList = 0
   for (const media of memberMedias) {
@@ -36,12 +44,8 @@ function chargeMainDiv () {
     htmlMedias += media.getMediaTemplate(photoPlaceInList, member.name)
     member.likes += media.likes
   }
-  const htmlMemberPage = member.getMemberTemplate(htmlMedias)
-  const modalHtmlMember = member.getModalTemplate()
-  document.getElementById('main-div').innerHTML = htmlMemberPage
-  document.getElementById('member-modal').innerHTML = modalHtmlMember
+  document.querySelector('.media-list').innerHTML = htmlMedias
 }
-
 // form checking and errors
 function checkFields () {
   const errorMessages = {
@@ -453,9 +457,7 @@ document.addEventListener('DOMContentLoaded', function () {
   chargeLightBox()
 })
 function recharge () {
-  chargeMainDiv()
+  chargeMediaList()
   addLikeCounterEvent()
-  chargeModal()
-  checkFields()
   openLightbox()
 }

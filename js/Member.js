@@ -41,7 +41,7 @@ export default class Member {
   `
   }
 
-  getMemberTemplate (htmlMedias) {
+  getMemberTemplate () {
     let memberTagHtml = ''
     for (const tag of this.tags) {
       memberTagHtml += `
@@ -88,8 +88,8 @@ export default class Member {
             </div>
             
           </div>
-          <div class="list">
-            ${htmlMedias}
+          <div class="list media-list">
+            
           </div>
         </section>
     `
