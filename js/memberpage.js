@@ -149,7 +149,7 @@ function chargeModal () {
 // fixed likesandprices
 function chargesLikesAndPriceDiv () {
   const likesAndPriceHtml = `
-    <div class="likes" id="likes"><span id="member-total-likes">${member.likes}</span><img src="../images/icons/heart_black.svg"/></div>
+    <div class="likes" id="likes"><span id="member-total-likes">${member.likes}</span><img src="./images/icons/heart_black.svg"/></div>
     <div class="price" id="price">${member.price}€/jour</div>
   `
   document.getElementById('likes-and-price').innerHTML = likesAndPriceHtml
@@ -228,9 +228,9 @@ function orderList () {
         templateOrderChoices = `
             <span id="ordering-label">Trier par</span>
             <div class= "order-collapse" id="">
-              <button class="order-element order-element--active">Date<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></button>
+              <button class="order-element order-element--active">Date<img class="arrow" src="./images/icons/chevron-down-solid.svg"/></button>
               <div class= "order-oppened" role="listbox" aria-activedescendant aria-selected aria-labelledby="ordering-label">
-                <button class="order-element order-element--active" id="order-date">Date<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></button>
+                <button class="order-element order-element--active" id="order-date">Date<img class="arrow" src="./images/icons/chevron-up-solid.svg"/></button>
                 <button class="order-element order-element--inactive" id="order-popularity">Popularité</button>
                 <button class="order-element order-element--inactive" id="order-title">Titre</button>
               </div>
@@ -241,9 +241,9 @@ function orderList () {
         templateOrderChoices = `
             <span class="ordering-label">Trier par</span>
             <div class= "order-collapse" id="">
-              <button class="order-element order-element--active">Titre<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></button>
+              <button class="order-element order-element--active">Titre<img class="arrow" src="./images/icons/chevron-down-solid.svg"/></button>
               <div class= "order-oppened" role="listbox" aria-activedescendant aria-selected aria-labelledby="ordering-label">
-                <button class="order-element order-element--active" id="order-title">Titre<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></button>
+                <button class="order-element order-element--active" id="order-title">Titre<img class="arrow" src="./images/icons/chevron-up-solid.svg"/></button>
                 <button class="order-element order-element--inactive" id="order-popularity">Popularité</button>
                 <button class="order-element order-element--inactive" id="order-date">Date</button>
               </div>
@@ -254,9 +254,9 @@ function orderList () {
         templateOrderChoices = `
             <span class="ordering-title">Trier par</span>
             <div class= "order-collapse" id="">
-              <button class="order-element order-element--active">Popularité<img class="arrow" src="../images/icons/chevron-down-solid.svg"/></button>
+              <button class="order-element order-element--active">Popularité<img class="arrow" src="./images/icons/chevron-down-solid.svg"/></button>
               <div class= "order-oppened" role="listbox" aria-activedescendant aria-selected aria-labelledby="ordering-label">
-                <button class="order-element order-element--active" id="order-popularité">Popularité<img class="arrow" src="../images/icons/chevron-up-solid.svg"/></button>
+                <button class="order-element order-element--active" id="order-popularité">Popularité<img class="arrow" src="./images/icons/chevron-up-solid.svg"/></button>
                 <button class="order-element order-element--inactive" id="order-title">Titre</button>
                 <button class="order-element order-element--inactive" id="order-date">Date</button>
               </div>
