@@ -6,6 +6,7 @@ const factory = new Factory()
 const membersJson = data.photographers
 const mediaJson = data.media
 const medias = []
+
 for (let i = 0; i < mediaJson.length; i++) {
   if(mediaJson[i].image){
     medias.push(factory.createImage(mediaJson[i]))
@@ -14,6 +15,7 @@ for (let i = 0; i < mediaJson.length; i++) {
   }
   
 }
+
 const url_string = window.location.href
 const url = new URL(url_string)
 const memberId = url.searchParams.get('id')
@@ -25,6 +27,8 @@ const member = factory.createMember(memberData)
 const memberMedias = medias.filter((media) => {
   return media.photographerId === parseInt(memberId)
 })
+// tri par défault par popularité (nb de likes)
+memberMedias.sort((a, b) => (a.likes < b.likes ? 1 : -1))
 const mediaCounter = memberMedias.length
 
 // chargement des photographes
